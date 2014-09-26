@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Emp>
+    <age>3</age>
+    <gender>Female</gender>
+    <id>1</id>
+    <name>Agustina</name>
+    <role>Boss</role>
+    <schedule>
+        <days>5</days>
+        <hours>3</hours>
+    </schedule>
+</Emp>
