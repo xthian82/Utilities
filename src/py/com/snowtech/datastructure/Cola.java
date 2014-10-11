@@ -1,32 +1,43 @@
 package py.com.snowtech.datastructure;
 
-public class Cola {
-	BNode first;
-	BNode last;
+import java.util.Iterator;
+
+public class Cola<Item> implements Iterable<Item> {
+	Node first = null;
+	Node last = null;
 	
-	public BNode peek() {
-		return first;
+	private class Node {
+		Item item = null;
+		Node next = null;
 	}
 	
-	public BNode poll() {
-		BNode n = null;
+	public Item peek() {
+		return first == null ? null : first.item;
+	}
+	
+	public Item dequeue() {
+		Item n = null;
 		
 		if (first != null) {
-			n = new BNode(first.value, first.left, first.right);
+			n = first.item;
 			
-			first = first.right;
+			first = first.next;
 		}
 		
 		return n;
 	}
 	
-	public void add(BNode n) {
+	public void enqueue(Item n) {
 		if (n != null) {
+			Node node = new Node();
+			node.item = n;
+			node.next = null;
+			
 			if (last != null) {
-				last.right = n;
+				last.next = node;
 			}
 			
-			last = n;
+			last = node;
 			
 			if (first == null) {
 				first = last;
@@ -37,36 +48,44 @@ public class Cola {
 	public boolean isEmpty() {
 		return (first == null);
 	}
+
+	@Override
+	public Iterator<Item> iterator() {
+		return new ListIterator();
+	}
+	
+	private class ListIterator implements Iterator<Item> {
+		private Node current = first;
+		
+		@Override
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		@Override
+		public Item next() {
+			Item item = null;
+			if (current != null) {
+				item = current.item;
+				current = current.next;
+			}
+			
+			return item;
+		}
+
+		@Override
+		public void remove() { }
+	}
 	
 	public static void main(String [] args) {
-		Cola a = new Cola();
-		System.out.println(a.isEmpty());
-		System.out.println(a.peek());
-		a.add(new BNode(1));
-		a.add(new BNode(2));
-		a.add(new BNode(3));
-		System.out.println(a.isEmpty());
-		a.add(new BNode(4));
-		a.add(new BNode(5));
-		System.out.println(a.peek());
-		System.out.println(a.poll());
-		System.out.println(a.peek());
-		System.out.println(a.isEmpty());
-		System.out.println(a.peek());
-		System.out.println(a.poll());
-		System.out.println(a.peek());
-		System.out.println(a.peek());
-		System.out.println(a.poll());
-		System.out.println(a.peek());
-		System.out.println(a.isEmpty());
-		System.out.println(a.peek());
-		System.out.println(a.poll());
-		System.out.println(a.peek());
-		System.out.println(a.peek());
-		System.out.println(a.poll());
-		System.out.println(a.isEmpty());
-		System.out.println(a.peek());
-		System.out.println(a.poll());
-		System.out.println(a.isEmpty());
+		Cola<String> a = new Cola<String>();
+		a.enqueue("1");
+		a.enqueue("2");
+		a.enqueue("3");
+		a.enqueue("4");
+		a.enqueue("5");
+
+		Iterator<String> it = a.iterator();
+		while (it.hasNext()) System.out.println(it.next());
 	}
 }

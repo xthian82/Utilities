@@ -1,44 +1,48 @@
 package py.com.snowtech.datastructure;
 
-class Node {
-	int value;
-	Node left;
-	Node next;
+import java.util.Iterator;
 
-	public Node(int value) {
-		this.value = value;
-		this.left = null;
-		this.next = null;
-	}
 
-	@Override
-	public String toString() {
-		return " " + (this == null ? "-" : value);
-	}
-}
 
-public class Lista {
-	Node head;
+public class Lista<Item> implements Iterable<Item> {
+	private Node head;
+	
+	private class Node {
+		Item value;
+	    Node next;
+		
+	    public Node(Item value) {
+	    	this.value = value;
+	    	this.next = null;
+	    }
 
-	void rprint() {
-		rprint(head.next);
-	}
-
-	void rprint(Node n) {
-		if (n == null) {
-			System.out.println("");
-			return;
+		@Override
+		public String toString() {
+			return " " + (this == null ? "-" : value);
 		}
-
-		System.out.print(n);
-		rprint(n.next);
+	}	
+	
+	public void addLast() {
+		
 	}
-
-	void createList(int[] array) {
+	
+	public void addFirst() {
+		
+	}
+	
+	public void removeFirst() {
+		
+	}
+	
+	public void removeLast() {
+		
+	}
+	
+	public void createList(Item[] array) {
 		if (array.length < 1) return;
-
-		head = new Node(-1);
-
+			
+		head = new Node(null);
+		
 		Node m, n = new Node(array[0]);
 		head.next = n;
 		for (int i=1; i<array.length; i++) {
@@ -46,55 +50,40 @@ public class Lista {
 			n.next = m;
 			n = m;
 		}
+	}	
+
+	public Iterator<Item> iterator() {
+		return new ListIterator();
 	}
+	
+	private class ListIterator implements Iterator<Item> {
+		private Node current = head.next;
 
-	void deleteDuplicates() {
-		//deleteDuplicates(head.next);
-		delete2(head.next);
-	}
-
-	void deleteDuplicates(Node head) {
-		if (head == null) return;
-
-		Node p = head;
-		head = head.next;
-
-		while (head != null) {
-			if (p.value == head.value) {
-				head = head.next;
-			}
-			else {
-				p.next = head;
-				p = head;
-			}
+		public boolean hasNext() {
+			return current != null;
 		}
-		p.next = null;
-	}
 
-	void delete2(Node head) {
-		if(head == null || head.next == null)
-			return;
-
-		Node p = head;
-
-		while( p!= null && p.next != null){
-			if(p.value == p.next.value){
-				p.next = p.next.next;
-			}else{
-				p = p.next; 
+		public Item next() {
+			Item item = null;
+			
+			if (current != null) {
+				item = current.value;
+				current = current.next;
 			}
+			
+			return item;
 		}
-	}
 
+		public void remove() { }		
+	}
+	
 	public static void main(String... args) {
-		Lista ap = new Lista();
-		int[] a = {1, 1, 1, 2, 3, 3, 4, 4, 4};
-
+		Lista<Integer> ap = new Lista<Integer>();
+		Integer[] a = {1, 2, 3, 4, 5, 6};
+		
 		ap.createList(a);
-		System.out.print("Original : ");
-		ap.rprint();
-		ap.deleteDuplicates( );
-		System.out.print("\nRemoveDup : ");
-		ap.rprint();
+		
+		Iterator<Integer> it = ap.iterator();
+		while(it.hasNext()) System.out.print(it.next() + " ");
 	}
 }
