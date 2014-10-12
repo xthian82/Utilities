@@ -1,5 +1,5 @@
 package py.com.snowtech.sort;
 
-public class Bucketsort {
+public class Bucket {
 
 }

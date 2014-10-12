@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 public class Lista<Item> implements Iterable<Item> {
 	private Node head;
+	private int size = 0;
 	
 	private class Node {
 		Item value;
@@ -38,6 +39,10 @@ public class Lista<Item> implements Iterable<Item> {
 		
 	}
 	
+	public int size() {
+		return this.size;
+	}
+	
 	public void createList(Item[] array) {
 		if (array.length < 1) return;
 			
@@ -50,6 +55,7 @@ public class Lista<Item> implements Iterable<Item> {
 			n.next = m;
 			n = m;
 		}
+		this.size = array.length;
 	}	
 
 	public Iterator<Item> iterator() {

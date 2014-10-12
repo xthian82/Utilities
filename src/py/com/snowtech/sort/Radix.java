@@ -2,7 +2,7 @@ package py.com.snowtech.sort;
 
 import py.com.snowtech.util.Utils;
 
-public class Radixsort {
+public class Radix {
 	private static final int BASE = 10;
 	
 	public static void sort(int[] a)
@@ -46,7 +46,7 @@ public class Radixsort {
 		int [] a = {6,5,46,2,3,10,9};
 		
 		Utils.print( a );
-		Radixsort.sort( a );
+		Radix.sort( a );
 		Utils.print( a );
 	}
 }

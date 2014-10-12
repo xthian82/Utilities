@@ -3,8 +3,9 @@ package py.com.snowtech.datastructure;
 import java.util.Iterator;
 
 public class Cola<Item> implements Iterable<Item> {
-	Node first = null;
-	Node last = null;
+	private Node first = null;
+	private Node last = null;
+	private int size = 0;
 	
 	private class Node {
 		Item item = null;
@@ -22,6 +23,7 @@ public class Cola<Item> implements Iterable<Item> {
 			n = first.item;
 			
 			first = first.next;
+			--size;
 		}
 		
 		return n;
@@ -42,7 +44,12 @@ public class Cola<Item> implements Iterable<Item> {
 			if (first == null) {
 				first = last;
 			}
+			++size;
 		}
+	}
+	
+	public int size() {
+		return this.size;
 	}
 	
 	public boolean isEmpty() {

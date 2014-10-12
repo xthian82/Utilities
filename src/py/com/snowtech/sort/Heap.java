@@ -2,7 +2,7 @@ package py.com.snowtech.sort;
 
 import py.com.snowtech.util.Utils;
 
-public class Heapsort {
+public class Heap {
 	public static void sort(int[] a) {
 		int count = a.length;
 		
@@ -55,7 +55,7 @@ public class Heapsort {
 		int [] a = {6,5,46,2,3,10,9};
 		
 		Utils.print( a );
-		Heapsort.sort( a );
+		Heap.sort( a );
 		Utils.print( a );
 	}
 }

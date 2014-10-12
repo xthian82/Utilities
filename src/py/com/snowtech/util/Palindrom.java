@@ -1,27 +1,44 @@
 package py.com.snowtech.util;
 
-import java.util.ArrayList;
-import java.util.List;
+/*
+ * Determinar si un numero es palindrome
+ * 
+ * Ej 2111223 = false
+ *    212 = true
+ *    3656556 = false
+ *    3112113 = true 
+ * 
+ * */
 
 public class Palindrom {
 	public static boolean isPalindrom(int number) {
-		List<Integer> n = new ArrayList<Integer>();
+		int n = number / 10;
+		int d = 1;
+		int r,l;
 		
-		do {
-			n.add(number % 10);
-			number /= 10;
-		} while (number != 0);
+		while (n != 0) {
+			n /= 10;
+			d *= 10;
+		} 
 		
+		n = number;
 		
-		for (int i=0, j=n.size()-1; i<n.size() / 2; i++, j--) {
-			if (n.get(i) != n.get(j))
-				return false;
+		while (n != 0) {
+			r = n / d;
+			l = n % 10;
+			
+			if (r != l) return false;
+			
+			n -= r*d;
+			n /= 10;
+			d /= 100;
 		}
+		
 		return true;
 	}
 	
 	public static void main(String... args) {
-		System.out.print(Palindrom.isPalindrom(2325232));
+		System.out.print(Palindrom.isPalindrom(1));
 	}
 }
 

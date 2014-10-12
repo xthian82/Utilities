@@ -9,6 +9,7 @@ public class Pila<Item> implements Iterable<Item> {
 	}
 	
 	private Node top;
+	private int size;
 	
 	public Pila() {
 		top = null;
@@ -28,6 +29,7 @@ public class Pila<Item> implements Iterable<Item> {
 		top = new Node();
 		top.item = s;
 		top.next = tmp;
+		++size;
 	}
 	
 	public Item pop() {
@@ -36,9 +38,14 @@ public class Pila<Item> implements Iterable<Item> {
 		if (top != null) {
 			n = top.item;
 			top = top.next;
+			--size;
 		}
 		
 		return n;
+	}
+	
+	public int size() {
+		return this.size;
 	}
 	
 	public static void main(String[] args) {

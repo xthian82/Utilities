@@ -2,7 +2,7 @@ package py.com.snowtech.sort;
 
 import py.com.snowtech.util.Utils;
 
-public class Quicksort {
+public class Quick {
 	
 	public static void sort(int[] v, int m, int n) {
 		int i,j,k;
@@ -30,7 +30,7 @@ public class Quicksort {
 		int [] a = {6,5,46,2,3,10,9};
 		
 		Utils.print(a);
-		Quicksort.sort(a, 0, a.length-1);
+		Quick.sort(a, 0, a.length-1);
 		Utils.print(a);
 	}
 }
