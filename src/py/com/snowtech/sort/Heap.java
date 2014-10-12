@@ -1,34 +1,40 @@
 package py.com.snowtech.sort;
 
-import py.com.snowtech.util.Utils;
+import java.util.Comparator;
 
-public class Heap {
-	public static void sort(int[] a) {
+@SuppressWarnings("rawtypes")
+public class Heap extends Sort {
+	@Override
+	public void sort(Comparable[] e) {
+		sort(null, e);		
+	}
+	
+	public void sort(Comparator c, Comparable[] a) {
 		int count = a.length;
 		
-		heapify(a, count);
+		heapify(c, a, count);
 		int end = count - 1;
 		
 		while (end > 0) {
-			Utils.swapElement(a, 0, end);
+			exch(a, 0, end);
 			end--;
-			siftDown(a, 0, end);
+			siftDown(c, a, 0, end);
 		}
 	}
 	
-	private static void siftDown(int[] a, int start, int end) {
+	private void siftDown(Comparator c, Comparable[] a, int start, int end) {
 		int root = start, child, swap;
 		
 		while (root*2 + 1 <= end) {
 			child = 2*root + 1; //left child
 			swap = root;
 			
-			if (a[swap] < a[child])
+			if (less(c, a[swap], a[child]))
 				swap = child;
-			if (child+1 < end && a[swap] < a[child+1])
+			if (child+1 <= end && less(c, a[swap], a[child+1]))
 				swap = child + 1;
 			if (swap != root) {
-				Utils.swapElement(a, root, swap);
+				exch(a, root, swap);
 				root = swap;
 			}
 			else 
@@ -36,7 +42,7 @@ public class Heap {
 		}
 	}
 
-	private static void heapify(int[] a, int n) {
+	private void heapify(Comparator c, Comparable[] a, int n) {
 		//start is assigned the index in a of the last parent node
 	    //the last element in a 0-based array is at index count-1; find the parent of that element
 	    int start = (n - 2 ) / 2;
@@ -44,7 +50,7 @@ public class Heap {
 	    while (start >= 0) {
 	    	//sift down the node at index start to the proper place such that all nodes below
 	        //the start index are in heap order)
-	        siftDown(a, start, n-1);
+	        siftDown(c, a, start, n-1);
 	        //go to the next parent node
 	        start--;
 	        //after sifting down the root all nodes/elements are in heap order
@@ -52,10 +58,29 @@ public class Heap {
 	}
 	
 	public static void main(String[] args) {
-		int [] a = {6,5,46,2,3,10,9};
+		Integer [] a = {6,5,46,2,3,10,9};
+		String [] b = {"Xavier", "Orange", "Blue", "apple", "Pimple"};
+		Short[] c = {1,8,7,12,15,4};
+		Character[] d = {'L','x','D','a','b','C'};
 		
-		Utils.print( a );
-		Heap.sort( a );
-		Utils.print( a );
+		Heap heap = new Heap();
+		
+		heap.print( a );
+		heap.sort( a );
+		heap.print( a );
+		
+		heap.print( b );
+		heap.sort( b );
+		heap.print( b );
+		
+		heap.print( c );
+		heap.sort( c );
+		heap.print( c );
+		
+		heap.print( d );
+		heap.sort( d );
+		heap.print( d );
 	}
+
+	
 }

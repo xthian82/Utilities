@@ -5,15 +5,10 @@ import java.util.Comparator;
 @SuppressWarnings("rawtypes")
 public class Bubble extends Sort {
 	public void sort(Comparable [] a) {
-		for (int i=0; i<a.length-1; i++) {
-			for (int j=i+1; j<a.length; j++) {
-				if (less(a[j], a[i]))
-					exch(a, i, j);
-			}
-		}
+		sort(a, null);
 	}	
 	
-	public void sort(Object [] a, Comparator c) {
+	public void sort(Comparable [] a, Comparator c) {
 		for (int i=0; i<a.length-1; i++) {
 			for (int j=i+1; j<a.length; j++) {
 				if (less(c, a[j], a[i]))

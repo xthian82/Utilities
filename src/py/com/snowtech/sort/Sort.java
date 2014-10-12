@@ -5,32 +5,34 @@ import java.util.Comparator;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class Sort {
 	abstract void sort(Comparable[] e);
-	void sort(Comparator c, Object[] e) {}
+	void sort(Comparator c, Comparable[] e) { sort(null, e); }
 
-	public void exch(Object[] a, int i, int j) {
-		Object tmp = a[i];
+	public void exch(Comparable[] a, int i, int j) {
+		Comparable tmp = a[i];
 		
 		a[i] = a[j];
 		a[j] = tmp;
 	}
 	
-	public boolean less(Comparable a, Comparable b) {
+	private boolean less(Comparable a, Comparable b) {
 		return a.compareTo(b) < 0;
 	}
 	
-	public boolean less(Comparator c, Object a, Object b) {
-		return c.compare(a, b) < 0;
-	}
-	
-	public boolean equal(Comparable a, Comparable b) {
+	private boolean equal(Comparable a, Comparable b) {
 		return a.compareTo(b) == 0;
 	}	
 	
-	public boolean equal(Comparator c, Object a, Object b) {
-		return c.compare(a, b) == 0;
+	public boolean less(Comparator c, Comparable a, Comparable b) {
+		if (c != null) return c.compare(a, b) < 0;
+		else return less(a, b);
+	}	
+	
+	public boolean equal(Comparator c, Comparable a, Comparable b) {
+		if (c != null) return c.compare(a, b) == 0;
+		else return equal(a, b);
 	}
 	
-	public boolean isSorted(Comparator c, Object[] a, int begin, int end) {
+	public boolean isSorted(Comparator c, Comparable[] a, int begin, int end) {
 		for (int i=begin; i<end; i++) {
 			if (less(c, a[i], a[i-1])) {
 				return false;
@@ -40,17 +42,7 @@ public abstract class Sort {
 		return true;
 	}
 	
-	public boolean isSorted(Comparable[] a, int begin, int end) {
-		for (int i=begin; i<end; i++) {
-			if (less(a[i], a[i-1])) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	public void shuffle(Object[] a) {
+	public void shuffle(Comparable[] a) {
 		int r;
 		int N = a.length;
 		
@@ -61,7 +53,7 @@ public abstract class Sort {
 		}		
 	}
 	
-	public void print(Object[] a) {
+	public void print(Comparable[] a) {
 		int i;
 		System.out.print("[ ");
 		
