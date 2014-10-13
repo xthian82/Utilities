@@ -3,7 +3,7 @@ package py.com.snowtech.sort;
 import java.util.Comparator;
 
 @SuppressWarnings("rawtypes")
-public class Heap extends Sort {
+public class Heapsort extends Sort {
 	@Override
 	public void sort(Comparable[] e) {
 		sort(null, e);		
@@ -12,17 +12,16 @@ public class Heap extends Sort {
 	public void sort(Comparator c, Comparable[] a) {
 		int count = a.length;
 		
-		heapify(c, a, count);
+		buildHeap(c, a, count);
 		int end = count - 1;
 		
 		while (end > 0) {
-			exch(a, 0, end);
-			end--;
-			siftDown(c, a, 0, end);
+			exch(a, 0, end--);
+			sink(c, a, 0, end);
 		}
 	}
-	
-	private void siftDown(Comparator c, Comparable[] a, int start, int end) {
+
+	private void sink(Comparator c, Comparable[] a, int start, int end) {
 		int root = start, child, swap;
 		
 		while (root*2 + 1 <= end) {
@@ -42,18 +41,14 @@ public class Heap extends Sort {
 		}
 	}
 
-	private void heapify(Comparator c, Comparable[] a, int n) {
+	private void buildHeap(Comparator c, Comparable[] a, int n) {
 		//start is assigned the index in a of the last parent node
 	    //the last element in a 0-based array is at index count-1; find the parent of that element
-	    int start = (n - 2 ) / 2;
-	    
-	    while (start >= 0) {
+	    for (int k=n/2; k >= 0; k--) {
 	    	//sift down the node at index start to the proper place such that all nodes below
 	        //the start index are in heap order)
-	        siftDown(c, a, start, n-1);
+	        sink(c, a, k, n-1);
 	        //go to the next parent node
-	        start--;
-	        //after sifting down the root all nodes/elements are in heap order
 	    }
 	}
 	
@@ -63,7 +58,7 @@ public class Heap extends Sort {
 		Short[] c = {1,8,7,12,15,4};
 		Character[] d = {'L','x','D','a','b','C'};
 		
-		Heap heap = new Heap();
+		Heapsort heap = new Heapsort();
 		
 		heap.print( a );
 		heap.sort( a );

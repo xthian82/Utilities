@@ -1,116 +1,141 @@
 package py.com.snowtech.datastructure;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-public class Heap<Item extends Comparable<Item>> {
-	private List<Item> ap;
-	private Item min = null;
-	private Item max = null;
+/*
+ *  Uses for Priority Queues
+ *  ------------------------
+ *  
+ * event driven simulation
+ * numerical comp
+ * data compresion
+ * graph searching
+ * number theory
+ * AI
+ * statistics
+ * Operating systems
+ * discrete optimizatioin
+ * spam filtering
+ * */
+
+public class Heap<Key extends Comparable<Key>> implements Iterable<Key> {
+	private Key[] p = null;
+	private int N = 0;
 	
-	public Heap() {
-		ap = new ArrayList<Item>();
+	@SuppressWarnings("unchecked")
+	public Heap(int capacity) {
+		p = (Key[]) new Comparable[capacity+1];
+		p[0] = null;
 	}
 	
-	public void addItem(Item item) {
-		ap.add(item);
-		int l = ap.size()-1;
+	public void insert(Key key) {
+		if (N >= p.length) throw new ArrayIndexOutOfBoundsException(N);
 		
-		if (min == null || min.compareTo(item) > 0) min = item;
-		if (max == null || max.compareTo(item) < 0) max = item;
+		p[++N] = key;
 		
-		if (l > 0) siftUp((l - 1) / 2, l);
+		swimUp(N/2, N);
 	}
 	
-	public void remove(Item item) {
-		ap.remove(item);
+	public Key deleteMax() {
+		if (isEmpty()) throw new ArrayIndexOutOfBoundsException(-1);
+		
+		Key max = p[1];
+		exch(1, N--);
+		sink( 1 );
+		p[N + 1] = null;
+		
+		return max;
 	}
 	
-	private void siftUp(int parent, int child) {
-		if (parent < 0) return;
+	public boolean isEmpty() {
+		return N == 0;
+	}
+
+	private void swimUp(int parent, int child) {
+		if (parent < 1) return;
 		
-		if (ap.get(parent).compareTo(ap.get(child)) < 0) {
-			//System.out.println("swaping " + ap.get(parent) + " and "+ ap.get(child));
-			Item tmp = ap.get(parent);
-			ap.set(parent, ap.get(child));
-			ap.set(child, tmp);
-			siftUp((parent-1) / 2, parent);
+		if (less(parent, child)) {
+			exch(parent, child);
+			swimUp(parent / 2, parent);
 		}
 	}
-
-	public void heapify(Item[] a) {
-		int start = a.length / 2;
-		int end = a.length-1;
-		
-		while (start >= 0) {
-			shift(a, start, end);
-			start--;
-		}
-	}
 	
-	private void shift(Item[] a, int start, int end) {
-		int root = start, child = 2*start+1, swap;		
+	private void sink(int k) {
+		int j = 2*k, swap;		
 		
-		while (child <= end) {
-			swap = root;
+		while (j <= N) {
+			swap = k;
 			
-			if (a[swap].compareTo(a[child]) < 0)
-				swap = child;
+			if (less(swap, j))
+				swap = j;
 			
-			if (child + 1 <= end && a[swap].compareTo(a[child+1]) < 0)
-				swap = child + 1;
+			if (j + 1 <= N && less(swap, j+1))
+				swap = j + 1;
 			
-			if (swap != root) {
-				change(a, swap, root);
-				root = swap;
+			if (swap != k) {
+				exch(swap, k);
+				k = swap;
 			} else 
 				break;
 			
-			child = 2*root+1;
+			j = 2*k;
 		}
 	}
 
-	private void change(Item[] a, int i, int j) {
-		Item tmp = a[i];
+	private void exch(int i, int j) {
+		Key tmp = p[i];
 		
-		a[i] = a[j];
-		a[j] = tmp;		
-	}
-
-	public static void print(int[] a) {
-		for (int i=0; i<a.length; i++) {
-			System.out.print(a[i] + " ");
-		}
-		System.out.println("");
+		p[i] = p[j];
+		p[j] = tmp;		
 	}
 	
-	public void print( ) {
-		for (int i=0; i<ap.size(); i++) {
-			System.out.print(ap.get(i) + " ");
-		}
-		System.out.println("");
+	private boolean less(int i, int j) {
+		return p[i].compareTo(p[j]) < 0;
 	}
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//int[] a = {1, 2, 3, 7,17,19,25,36,100};
-		Heap<Integer> h = new Heap<Integer>();
+		Heap<Integer> h = new Heap<Integer>(12);
 		
-		h.addItem(6);
-		h.addItem(5);		
-		h.addItem(3);
-		h.addItem(1);
-		h.addItem(8);
-		h.addItem(7);
-		h.addItem(2);
-		h.addItem(4);
+		h.insert(6);
+		h.insert(5);		
+		h.insert(3);
+		h.insert(1);
+		h.insert(8);
+		h.insert(7);
+		h.insert(2);
+		h.insert(12);
+		h.insert(4);
+		h.deleteMax();
 		
-		h.print();
-		h.remove(4);
-		h.print();
-		/*Heap.print(a);
-		Heap.heapify(a);
-		Heap.print(a);*/
+		Iterator<Integer> it = h.iterator();
+		
+		while (it.hasNext())
+			System.out.print(it.next()+" ");
+	}
+
+	@Override
+	public Iterator<Key> iterator() {
+		return new HeapIterator();
+	}
+	
+	private class HeapIterator implements Iterator<Key> {
+		private int current = 1;
+		
+		@Override
+		public boolean hasNext() {
+			return current <= N;
+		}
+
+		@Override
+		public Key next() {
+			return p[current++];
+		}
+
+		@Override
+		public void remove() { }
+		
 	}
 }
