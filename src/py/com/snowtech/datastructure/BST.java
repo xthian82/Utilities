@@ -1,0 +1,215 @@
+package py.com.snowtech.datastructure;
+
+import java.util.Queue;
+
+/*
+ * Binary Search Tree
+ */
+public class BST<Key extends Comparable<Key>, Value> {
+	private Node root;
+	
+	private class Node {
+		Key key;
+		Value value;
+		Node left;
+		Node right;
+		int count;
+		
+		Node(Key key, Value value) {
+			this.key = key;
+			this.value = value;
+			this.left = null;
+			this.right = null;
+			this.count = 0;
+		}
+	}
+	
+	public void put(Key key, Value value) {
+		this.root = put(this.root, key, value);
+	}
+	//TODO: rechequear
+	private Node put(Node n, Key key, Value value) {
+		if (n == null) return new Node(key, value);
+		
+	    int cmp = key.compareTo(n.key);
+		if (cmp < 0) { 
+			n.left = put(n.left, key, value);
+		}
+		else if (cmp > 0) {
+			n.right = put(n.right, key, value);
+		} else {
+			n.value = value;
+		}
+		n.count = 1 + size(n.left) + size(n.right);
+		return n;
+	}
+	
+	public int size() {
+		return size(root);
+	}
+	
+	private int size(Node n) {
+		if (n == null) return 0;
+		
+		return n.count;
+	}
+	
+	public Value get(Key key) {
+		Node m = root;
+		
+		while (m != null) {
+			int cmp = key.compareTo(m.key);
+			if (cmp == 0) 
+				return m.value;
+			else if (cmp < 0)
+				m = m.left;
+			else
+				m = m.right;
+		}	
+		
+		return null;
+	}
+	
+	public Value min() {
+		return min(root);
+	}
+	
+	private Value min(Node n) {
+		if (n == null) return null;
+		
+		while (n.left != null) {
+			n = n.left;
+		}
+		
+		return n.value;
+	}
+	
+	public Value max() {
+		return max(root);
+	}
+	
+	private Value max(Node n) {
+		if (n == null) return null;
+		
+		while (n.right != null)
+			n = n.right;
+		
+		return n.value;
+	}
+	
+	public Key floor(Key key) {
+		Node x = floor(key, root);
+		
+		if (x == null) return null;
+		
+		return x.key;
+	}
+	
+	private Node floor(Key key, Node n) {
+		if (n == null) return null;
+		
+		int cmp = n.key.compareTo(key);
+		
+		if (cmp == 0) return n;
+		else if (cmp < 0) return floor(key, n.right);
+		Node t = floor(key, n.left);
+		
+		if (t != null)
+			return t;
+		else
+			return n;
+	}
+	
+	//how many keys < k
+	public int rank(Key key) {
+		return rank(key, root);
+	}
+	
+	private int rank(Key key, Node n) {
+		if (n == null)
+			return 0;
+		
+		int cmp = key.compareTo(n.key);
+		
+		if (cmp == 0) 
+			return size(n.left);
+		else if (cmp < 0)
+			return rank(key, n.left);
+		else
+			return 1 + size(n.left) + rank(key, n.right);
+	}
+	
+	public void delete(Key key) {
+		
+	}
+	
+	public Iterable<Key> iterator() {
+		Cola<Key> q = new Cola<Key>();
+		inorder(root, q);
+		
+		return q;
+	}
+	
+	private void inorder(Node n, Cola<Key> q) {
+		if (n == null) return;
+		
+		inorder(n.left, q);
+		q.enqueue(n.key);
+		inorder(n.right, q);
+		
+	}
+	
+	public void postorder() {
+		System.out.print("\npostOrder : ");
+		postorder(root);
+		System.out.println();
+	}
+	
+	private void postorder(Node n) {
+		if (n == null) return;
+		postorder(n.left);
+		postorder(n.right);
+		System.out.print(n.key + " ");
+	}
+	
+	public void preorder() {
+		System.out.print("\npreorder : ");
+		preorder(root);
+		System.out.println();
+	}
+	
+	private void preorder(Node n) {
+		if (n == null) return;
+
+		System.out.print(n.key + " ");
+		preorder(n.left);
+		preorder(n.right);
+	}
+	
+	/*
+	 *  The pre-order traversal is: 8, 3, 1, 6, 4, 7, 10, 14, 13.
+		The in-order traversal is: 1, 3, 4, 6, 7, 8, 10, 13, 14.
+		The post-order traversal is: 1, 4, 7, 6, 3, 13, 14, 10, 8.
+	 * */
+	public static void main(String... args) {
+		BST<Integer, Integer> bst = new BST<Integer, Integer>();
+		
+		bst.put(8,  8);
+		
+		bst.put(3, 3);
+		bst.put(10, 10);
+		bst.put(1, 1);
+		bst.put(6, 6);
+		bst.put(14, 14);
+		bst.put(4, 4);
+		bst.put(7, 7);
+		bst.put(13, 13);
+		
+		for (int n : bst.iterator()) {
+			System.out.print(n + " ");
+		}
+		
+		bst.postorder();
+		bst.preorder();
+	}
+}
