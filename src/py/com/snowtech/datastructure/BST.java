@@ -1,7 +1,5 @@
 package py.com.snowtech.datastructure;
 
-import java.util.Queue;
-
 /*
  * Binary Search Tree
  */
@@ -13,21 +11,19 @@ public class BST<Key extends Comparable<Key>, Value> {
 		Value value;
 		Node left;
 		Node right;
-		int count;
 		
 		Node(Key key, Value value) {
 			this.key = key;
 			this.value = value;
 			this.left = null;
 			this.right = null;
-			this.count = 0;
 		}
 	}
 	
 	public void put(Key key, Value value) {
 		this.root = put(this.root, key, value);
 	}
-	//TODO: rechequear
+	
 	private Node put(Node n, Key key, Value value) {
 		if (n == null) return new Node(key, value);
 		
@@ -40,7 +36,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		} else {
 			n.value = value;
 		}
-		n.count = 1 + size(n.left) + size(n.right);
+
 		return n;
 	}
 	
@@ -51,7 +47,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	private int size(Node n) {
 		if (n == null) return 0;
 		
-		return n.count;
+		return 1 + size(n.left) + size(n.right);//n.count;
 	}
 	
 	public Value get(Key key) {
@@ -108,11 +104,11 @@ public class BST<Key extends Comparable<Key>, Value> {
 	private Node floor(Key key, Node n) {
 		if (n == null) return null;
 		
-		int cmp = n.key.compareTo(key);
+		int cmp = key.compareTo(n.key);
 		
 		if (cmp == 0) return n;
-		else if (cmp < 0) return floor(key, n.right);
-		Node t = floor(key, n.left);
+		else if (cmp < 0) return floor(key, n.left);
+		Node t = floor(key, n.right);
 		
 		if (t != null)
 			return t;
@@ -123,6 +119,19 @@ public class BST<Key extends Comparable<Key>, Value> {
 	//how many keys < k
 	public int rank(Key key) {
 		return rank(key, root);
+	}
+	
+	public int size(Key key) {
+		return sizeGet(key, root);
+	}
+	
+	private int sizeGet(Key k, Node n) {
+		if (n == null) return 0;
+		
+		int cmp = k.compareTo(n.key);
+		if (cmp == 0) return size(n);
+		else if (cmp < 0) return sizeGet(k, n.left);
+		else return sizeGet(k, n.right);
 	}
 	
 	private int rank(Key key, Node n) {
@@ -160,7 +169,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	}
 	
 	public void postorder() {
-		System.out.print("\npostOrder : ");
+		System.out.print("postOrder : ");
 		postorder(root);
 		System.out.println();
 	}
@@ -173,7 +182,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	}
 	
 	public void preorder() {
-		System.out.print("\npreorder : ");
+		System.out.print("preorder : ");
 		preorder(root);
 		System.out.println();
 	}
@@ -192,7 +201,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		The post-order traversal is: 1, 4, 7, 6, 3, 13, 14, 10, 8.
 	 * */
 	public static void main(String... args) {
-		BST<Integer, Integer> bst = new BST<Integer, Integer>();
+		/*BST<Integer, Integer> bst = new BST<Integer, Integer>();
 		
 		bst.put(8,  8);
 		
@@ -208,8 +217,30 @@ public class BST<Key extends Comparable<Key>, Value> {
 		for (int n : bst.iterator()) {
 			System.out.print(n + " ");
 		}
-		
+		System.out.println();
 		bst.postorder();
 		bst.preorder();
+		System.out.println("Size: " + bst.size());
+		System.out.println("min: " + bst.min());
+		System.out.println("max: " + bst.max());
+		
+		System.out.println("rank8: " + bst.rank(8));
+		System.out.println("rank10: " + bst.rank(10));
+		System.out.println("rank6: " + bst.rank(6));
+		System.out.println("rank3: " + bst.rank(3));*/
+		BST<Character, Character> bst = new BST<Character, Character>();
+		
+		bst.put('S', 'S');		
+		bst.put('E', 'E');
+		bst.put('X', 'X');
+		bst.put('A', 'A');
+		bst.put('R', 'R');
+		bst.put('C', 'C');
+		bst.put('H', 'H');
+		bst.put('M', 'M');
+		
+		System.out.println(bst.floor('G'));
+		System.out.println(bst.size('S'));
+		
 	}
 }
