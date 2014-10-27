@@ -11,12 +11,14 @@ public class BST<Key extends Comparable<Key>, Value> {
 		Value value;
 		Node left;
 		Node right;
+		int count;
 		
 		Node(Key key, Value value) {
 			this.key = key;
 			this.value = value;
 			this.left = null;
 			this.right = null;
+			this.count = 0;
 		}
 	}
 	
@@ -37,6 +39,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 			n.value = value;
 		}
 
+		n.count = size(n.left) + size(n.right) + 1;
 		return n;
 	}
 	
@@ -47,7 +50,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	private int size(Node n) {
 		if (n == null) return 0;
 		
-		return 1 + size(n.left) + size(n.right);//n.count;
+		return /*1 + size(n.left) + size(n.right) */ n.count;
 	}
 	
 	public Value get(Key key) {
@@ -201,7 +204,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 		The post-order traversal is: 1, 4, 7, 6, 3, 13, 14, 10, 8.
 	 * */
 	public static void main(String... args) {
-		/*BST<Integer, Integer> bst = new BST<Integer, Integer>();
+		BST<Integer, Integer> bst = new BST<Integer, Integer>();
 		
 		bst.put(8,  8);
 		
@@ -227,20 +230,8 @@ public class BST<Key extends Comparable<Key>, Value> {
 		System.out.println("rank8: " + bst.rank(8));
 		System.out.println("rank10: " + bst.rank(10));
 		System.out.println("rank6: " + bst.rank(6));
-		System.out.println("rank3: " + bst.rank(3));*/
-		BST<Character, Character> bst = new BST<Character, Character>();
-		
-		bst.put('S', 'S');		
-		bst.put('E', 'E');
-		bst.put('X', 'X');
-		bst.put('A', 'A');
-		bst.put('R', 'R');
-		bst.put('C', 'C');
-		bst.put('H', 'H');
-		bst.put('M', 'M');
-		
-		System.out.println(bst.floor('G'));
-		System.out.println(bst.size('S'));
+		System.out.println("rank3: " + bst.rank(3));
+	
 		
 	}
 }

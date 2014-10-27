@@ -1,16 +1,32 @@
 package py.com.snowtech.datastructure;
 
-import java.util.LinkedList;
-import java.util.Queue;
+class GNode {
+	int value;
+	GNode next;
+	GNode[] neighbors;
+	boolean visited;
+	
+	GNode(int value) {
+		this.value = value;
+	}
+	GNode(int value, GNode[] n) {
+		this.value = value;
+		this.neighbors = n;
+	}
+	public String toString() {
+		return " " + (this == null ? "" : this.value);
+	}
+}
 
 public class Grafo {
+	
 	public static void levelOrder(GNode root) {
 		if (root == null) return;
 		//GQueue q = new GQueue();
 		int lHeight = 0;
 	
-		Queue<GNode> q = new LinkedList<GNode>();
-		Queue<Integer> qi = new LinkedList<Integer>();
+		Cola<GNode> q = new Cola<GNode>();
+		Cola<Integer> qi = new Cola<Integer>();
 		
 		root.visited = true;
 		System.out.print(root);

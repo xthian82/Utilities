@@ -29,6 +29,14 @@ public class Cola<Item> implements Iterable<Item> {
 		return n;
 	}
 	
+	public Item poll() {
+		return dequeue();
+	}
+	
+	public void add(Item n) {
+		enqueue(n);
+	}
+	
 	public void enqueue(Item n) {
 		if (n != null) {
 			Node node = new Node();
