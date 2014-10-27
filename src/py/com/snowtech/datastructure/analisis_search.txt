@@ -1,0 +1,6 @@
+                    search  | insert | delete
+                    --------------------------
+sequential search      N    |    N   |   N
+binary search         logN  |    2N  |   N
+binary search tree     N    |    N   |   N
+2-3 tree              logN  |  logN  | 
