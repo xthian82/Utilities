@@ -2,6 +2,7 @@ package py.com.snowtech.datastructure;
 
 /*
  * Binary Search Tree
+ * 
  */
 public class BST<Key extends Comparable<Key>, Value> {
 	private Node root;
@@ -70,17 +71,19 @@ public class BST<Key extends Comparable<Key>, Value> {
 	}
 	
 	public Value min() {
-		return min(root);
+		Node n = min(root);
+		if (n == null) return null;
+		return n.value;
 	}
 	
-	private Value min(Node n) {
+	private Node min(Node n) {
 		if (n == null) return null;
 		
 		while (n.left != null) {
 			n = n.left;
 		}
 		
-		return n.value;
+		return n;
 	}
 	
 	public Value max() {
@@ -151,10 +154,6 @@ public class BST<Key extends Comparable<Key>, Value> {
 			return 1 + size(n.left) + rank(key, n.right);
 	}
 	
-	public void delete(Key key) {
-		
-	}
-	
 	public Iterable<Key> iterator() {
 		Cola<Key> q = new Cola<Key>();
 		inorder(root, q);
@@ -196,6 +195,40 @@ public class BST<Key extends Comparable<Key>, Value> {
 		System.out.print(n.key + " ");
 		preorder(n.left);
 		preorder(n.right);
+	}
+	
+	public void deleteMin() {
+		root = deleteMin(root);
+	}
+	
+	private Node deleteMin(Node n) {
+		if (n.left == null) return n.right;
+		n.left = deleteMin(n.left);
+		
+		return n;
+	}
+	
+	public void delete(Key key) {
+		root = delete(key, root);
+	}
+	
+	private Node delete(Key k, Node n) {
+		if (n == null) return null;
+		
+		int cmp = k.compareTo(n.key);
+		
+		if (cmp < 0) n.left = delete(k, n.left);
+		else if (cmp > 0) n.right = delete(k, n.right);
+		else {
+			if (n.right == null) return n.left;
+			if (n.left == null) return n.right;
+			
+			Node t = n;
+			n = min(t.right);
+			n.right = deleteMin(t.right);
+			n.left = t.left;
+		}
+		return n;
 	}
 	
 	/*
