@@ -1,4 +1,4 @@
-package py.com.snowtch.patterns;
+package py.com.snowtech.patterns;
 
 interface CarInterface {
 	String getType();
@@ -8,7 +8,7 @@ interface CarFactory {
 	CarInterface makeCar();
 }
 
-public class FactoryPattern implements CarFactory {
+public class Factory implements CarFactory {
 	@Override
 	public CarInterface makeCar() {
 		return new Sedan();

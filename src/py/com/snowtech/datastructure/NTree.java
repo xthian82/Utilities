@@ -33,6 +33,7 @@ public class NTree {
 			this.children.add(n);
 		}
 		
+		@SuppressWarnings("unused")
 		public void removeChild(MNode n) {
 			this.children.remove(n);
 		}

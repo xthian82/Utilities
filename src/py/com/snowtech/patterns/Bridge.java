@@ -1,4 +1,4 @@
-package py.com.snowtch.patterns;
+package py.com.snowtech.patterns;
 
 interface DrawingAPI {
 	void drawCircle(double x, double y, double r);
@@ -52,7 +52,7 @@ class CircleShape extends Shape {
     }
 }
 
-public class BridgePattern {
+public class Bridge {
 	public static void main(String[] args) {
         Shape[] shapes = new Shape[] {
             new CircleShape(1, 2, 3, new DrawingAPI1()),

@@ -10,7 +10,8 @@ public class IntervalST<Key extends Comparable<Key>, Value> {
 	private static final boolean RED = true;
 	private static final boolean BLACK = false;
 	
-	private class Node {
+	@SuppressWarnings("unused")
+	private class Node {	
 		Key key, hi;
 		Value val;
 		Node left, right;

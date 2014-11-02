@@ -1,4 +1,4 @@
-package py.com.snowtch.patterns;
+package py.com.snowtech.patterns;
 
 interface Image {
 	public void displayImage();
@@ -56,7 +56,7 @@ class ProxyImage implements Image {
  
 }
 
-public class ProxyPattern {
+public class Proxy {
 	public static void main(String[] args) {
 		final Image IMAGE1 = new ProxyImage("HiRes_10MB_Photo1");
 	    final Image IMAGE2 = new ProxyImage("HiRes_10MB_Photo2");

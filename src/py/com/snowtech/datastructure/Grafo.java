@@ -1,77 +1,133 @@
 package py.com.snowtech.datastructure;
 
-class GNode {
-	int value;
-	GNode next;
-	GNode[] neighbors;
-	boolean visited;
-	
-	GNode(int value) {
-		this.value = value;
-	}
-	GNode(int value, GNode[] n) {
-		this.value = value;
-		this.neighbors = n;
-	}
-	public String toString() {
-		return " " + (this == null ? "" : this.value);
-	}
-}
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Grafo {
+	private final int V;
+	private Bolsa<Integer>[] adj;
 	
-	public static void levelOrder(GNode root) {
-		if (root == null) return;
-		//GQueue q = new GQueue();
-		int lHeight = 0;
-	
-		Cola<GNode> q = new Cola<GNode>();
-		Cola<Integer> qi = new Cola<Integer>();
+	@SuppressWarnings("unchecked")
+	public Grafo(int V) {
+		this.V = V;
 		
-		root.visited = true;
-		System.out.print(root);
-		q.add(root);
-		qi.add(1);
+		adj = (Bolsa<Integer>[])new Bolsa[V];
 		
-		//boolean newline = false;
-		while (!q.isEmpty()) {
-			GNode n = q.poll();
-			int h = qi.poll();
-			
-			if (n == null) continue;
-			
-			GNode[] nb = n.neighbors;
-			if (nb == null) continue;
-			for (int i=0; i<nb.length; i++) {
-				if (h > lHeight) {
-					lHeight = h;
-					System.out.println();
-				}
-				System.out.print(nb[i] + " ");
-				q.add(nb[i]);
-				qi.add(h + 1);
-			}
-		}
+		for (int v = 0; v < V; v++)
+			adj[v] = new Bolsa<Integer>();
 	}
 	
-	public static void main(String[] args) {
-		GNode n1 = new GNode(1); 
-		GNode n2 = new GNode(2); 
-		GNode n3 = new GNode(3); 
-		GNode n4 = new GNode(4); 
-		GNode n5 = new GNode(5); 
-		GNode n6 = new GNode(6); 
-		GNode n7 = new GNode(7); 
-		GNode n8 = new GNode(8); 
-		GNode n9 = new GNode(9); 
-		GNode n10 = new GNode(10); 
+	@SuppressWarnings("unchecked")
+	public Grafo(InputStreamReader in) {
+		BufferedReader r = new BufferedReader(in);
+		int n = 0;
+		String s = null;
 		
-		n5.neighbors = new GNode[]{n10};
-		n4.neighbors = new GNode[]{n8,n9};
-		n3.neighbors = new GNode[]{n6,n7};
-		n2.neighbors = new GNode[]{n4,n5};
-		n1.neighbors = new GNode[]{n2,n3};
+		try {
+			n = Integer.parseInt(r.readLine());
+			adj = (Bolsa<Integer>[])new Bolsa[n];
+			
+			for (int v = 0; v < n; v++)
+				adj[v] = new Bolsa<Integer>();
+			
+			while ((s = r.readLine()) != null) {
+				String [] tok = s.split(" ");
+				
+				if (tok.length == 2) {
+					try {
+						int v = Integer.parseInt(tok[0]);
+						int w = Integer.parseInt(tok[1]);
+						addEdge(v, w);
+						
+					} catch (NumberFormatException x) {
+						System.err.println(x.getMessage());
+					}
+				}
+			}
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		Grafo.levelOrder(n1);
+		this.V = n;
+	}
+	
+	//add edge v-w
+	void addEdge(int v, int  w) {
+		adj[v].add(w);
+		adj[w].add(v);
+	}
+	
+	// vertices adjacents to v
+	public Iterable<Integer> adj(int v) {
+		return adj[v];
+	}
+	
+	//number of vertifces
+	public int V() {
+		return V;
+	}
+	
+	//number of edges
+	public int E() {
+		return 0;
+	}
+	
+	public String toString() {
+		return "";
+	}
+	
+	//compute degree of v
+	@SuppressWarnings("unused")
+	public static int degree(Grafo g, int v) {
+		int degree = 0;
+		
+		for (int w: g.adj(v)) ++degree;
+		
+		return degree;
+	}
+	
+	//compute maximum degree
+	public static int maxDegree(Grafo g) {
+		int max = 0;
+		int d;
+		
+		for (int v = 0; v<g.V(); v++) {
+			d = degree(g, v);
+			if (d > max) max = d;
+		}
+		
+		return max;
+	}
+	
+	//compute average degree
+	public static double averageDegree(Grafo g) {
+		return 2.0 * g.E() / g.V();
+	}
+	
+	public static int numberOfSelfLoops(Grafo g) {
+		int count = 0;
+		for (int v = 0; v<g.V(); v++) {
+			for (int w : g.adj(v)) {
+				if (v == w) count++;
+			}
+		}
+		
+		return count / 2;
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException {
+		Grafo g = new Grafo(new FileReader("tokens.txt"));
+		
+		for (int v=0; v<g.V(); v++) {
+			for (int w : g.adj(v)) {
+				System.out.println(v + " - " + w);
+			}
+		}
 	}
 }

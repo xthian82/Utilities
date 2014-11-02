@@ -1,4 +1,4 @@
-package py.com.snowtch.patterns;
+package py.com.snowtech.patterns;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,6 +34,8 @@ class ResponseHandler implements Observer {
     }
 }
 
+
+//Observer pattern
 public class ObserverPattern {
 	public static void main(String[] args) {
         System.out.println("Enter Text >");

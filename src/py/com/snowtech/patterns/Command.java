@@ -1,13 +1,13 @@
-package py.com.snowtch.patterns;
+package py.com.snowtech.patterns;
 
 import java.util.ArrayList;
 import java.util.List;
 
-interface Command {
+interface commandInterface {
 	void execute();
 }
 
-class FlipUpCommand implements Command {
+class FlipUpCommand implements commandInterface {
 	private Light light;
 	
 	public FlipUpCommand(Light light) {
@@ -20,7 +20,7 @@ class FlipUpCommand implements Command {
 	}
 }
 
-class FlipDownCommand implements Command {
+class FlipDownCommand implements commandInterface {
 	private Light light;
 	
 	public FlipDownCommand(Light light) {
@@ -33,11 +33,11 @@ class FlipDownCommand implements Command {
 	}
 }
 
-public class CommandPattern {
+public class Command {
 	public static void main(String[] args) {
 		 Light lamp = new Light();
-	     Command switchUp = new FlipUpCommand(lamp);
-	     Command switchDown = new FlipDownCommand(lamp);
+	     commandInterface switchUp = new FlipUpCommand(lamp);
+	     commandInterface switchDown = new FlipDownCommand(lamp);
 	 
 	     Switch mySwitch = new Switch();
 	     
@@ -65,9 +65,9 @@ class Light {
 }
 
 class Switch {
-	private List<Command> history = new ArrayList<Command>();
+	private List<commandInterface> history = new ArrayList<commandInterface>();
 	
-	public void storeAndExecute(Command cmd) {
+	public void storeAndExecute(commandInterface cmd) {
 		this.history.add(cmd);
 		cmd.execute();
 	}

@@ -1,4 +1,4 @@
-package py.com.snowtch.patterns;
+package py.com.snowtech.patterns;
 
 
 interface ICarElement {
@@ -111,7 +111,7 @@ class CarElementDoVisitor implements ICarElementVisitor {
     }
 }
 
-public class VisitorPattern {
+public class Visitor {
 	public static void main(String[] args) {
 		ICarElement car = new Car();
 	
