@@ -1,7 +1,9 @@
-package py.com.snowtech.datastructure;
+package py.com.snowtech.datastructure.trees;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import py.com.snowtech.datastructure.lists.Cola;
 
 public class ArbolBinario<Item> {
     private class Node {

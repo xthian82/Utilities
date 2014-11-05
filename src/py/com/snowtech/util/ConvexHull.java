@@ -3,7 +3,7 @@ package py.com.snowtech.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import py.com.snowtech.datastructure.Pila;
+import py.com.snowtech.datastructure.lists.Pila;
 
 public class ConvexHull {
 	public static Pila<Point2D> process(Point2D[] p) {

@@ -1,4 +1,6 @@
-package py.com.snowtech.datastructure;
+package py.com.snowtech.datastructure.trees;
+
+import py.com.snowtech.datastructure.lists.Cola;
 
 /*
  * Binary Search Tree

@@ -1,4 +1,4 @@
-package py.com.snowtech.datastructure;
+package py.com.snowtech.datastructure.graphs;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,13 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import py.com.snowtech.datastructure.lists.Bolsa;
+
 public class Grafo {
-	private final int V;
+	private final int vertices;
+	private int edges;
 	private Bolsa<Integer>[] adj;
 	
 	@SuppressWarnings("unchecked")
 	public Grafo(int V) {
-		this.V = V;
+		this.vertices = V;
+		this.edges = 0;
 		
 		adj = (Bolsa<Integer>[])new Bolsa[V];
 		
@@ -25,6 +29,7 @@ public class Grafo {
 		BufferedReader r = new BufferedReader(in);
 		int n = 0;
 		String s = null;
+		this.edges = 0;
 		
 		try {
 			n = Integer.parseInt(r.readLine());
@@ -41,6 +46,7 @@ public class Grafo {
 						int v = Integer.parseInt(tok[0]);
 						int w = Integer.parseInt(tok[1]);
 						addEdge(v, w);
+						++this.edges;
 						
 					} catch (NumberFormatException x) {
 						System.err.println(x.getMessage());
@@ -54,13 +60,14 @@ public class Grafo {
 			e.printStackTrace();
 		}
 		
-		this.V = n;
+		this.vertices = n;
 	}
 	
 	//add edge v-w
 	void addEdge(int v, int  w) {
 		adj[v].add(w);
 		adj[w].add(v);
+		++edges;
 	}
 	
 	// vertices adjacents to v
@@ -70,12 +77,12 @@ public class Grafo {
 	
 	//number of vertifces
 	public int V() {
-		return V;
+		return this.vertices;
 	}
 	
 	//number of edges
 	public int E() {
-		return 0;
+		return this.edges;
 	}
 	
 	public String toString() {
@@ -128,6 +135,15 @@ public class Grafo {
 			for (int w : g.adj(v)) {
 				System.out.println(v + " - " + w);
 			}
+		}
+		int s = 1;
+		
+		Path p = new DepthFirstPath(g, s);
+		
+		//print all vertices connected to 's'
+		for (int v=0; v<g.V(); v++) {
+			if (p.hasPathTo(v))
+				System.out.print(v + " ");
 		}
 	}
 }

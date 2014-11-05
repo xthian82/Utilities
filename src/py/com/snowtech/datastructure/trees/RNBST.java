@@ -1,4 +1,4 @@
-package py.com.snowtech.datastructure;
+package py.com.snowtech.datastructure.trees;
 
 public class RNBST<Key extends Comparable<Key>, Val> {
 	private Node root;

@@ -1,4 +1,4 @@
-package py.com.snowtech.datastructure;
+package py.com.snowtech.datastructure.lists;
 
 import java.util.Iterator;
 
