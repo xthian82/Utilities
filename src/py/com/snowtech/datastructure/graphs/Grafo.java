@@ -9,34 +9,40 @@ import java.io.InputStreamReader;
 import py.com.snowtech.datastructure.lists.Bolsa;
 
 public class Grafo {
-	private final int vertices;
-	private int edges;
-	private Bolsa<Integer>[] adj;
+	protected final int vertices;
+	protected int edges;
+	protected Bolsa<Integer>[] adj;
 	
-	@SuppressWarnings("unchecked")
+	private static final ProcessEdge f1 = new ProcessEdge() {
+		public void addEdge(int v, int w, Bolsa<Integer>[] adj) {
+			adj[v].add(w);
+			adj[w].add(v);
+	    }
+	};
+	
 	public Grafo(int V) {
 		this.vertices = V;
 		this.edges = 0;
-		
-		adj = (Bolsa<Integer>[])new Bolsa[V];
-		
-		for (int v = 0; v < V; v++)
-			adj[v] = new Bolsa<Integer>();
+		buildList(V);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Grafo(InputStreamReader in) {
-		BufferedReader r = new BufferedReader(in);
+	private void buildList(int total) {
+		adj = (Bolsa<Integer>[])new Bolsa[total];
+		
+		for (int v = 0; v < total; v++)
+			adj[v] = new Bolsa<Integer>();
+	}
+	
+	private int processFile(InputStreamReader in, ProcessEdge p) {
 		int n = 0;
+
+		BufferedReader r = new BufferedReader(in);
 		String s = null;
-		this.edges = 0;
 		
 		try {
 			n = Integer.parseInt(r.readLine());
-			adj = (Bolsa<Integer>[])new Bolsa[n];
-			
-			for (int v = 0; v < n; v++)
-				adj[v] = new Bolsa<Integer>();
+			buildList(n);
 			
 			while ((s = r.readLine()) != null) {
 				String [] tok = s.split(" ");
@@ -45,8 +51,8 @@ public class Grafo {
 					try {
 						int v = Integer.parseInt(tok[0]);
 						int w = Integer.parseInt(tok[1]);
-						addEdge(v, w);
-						++this.edges;
+						p.addEdge(v, w, this.adj);
+						this.edges++;
 						
 					} catch (NumberFormatException x) {
 						System.err.println(x.getMessage());
@@ -59,14 +65,21 @@ public class Grafo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		this.vertices = n;
+		return n;
+	}
+	
+	protected Grafo(InputStreamReader in, ProcessEdge p) {
+		this.edges = 0;
+		this.vertices = processFile(in, p);
+	}
+	
+	public Grafo(InputStreamReader in) {
+		this(in, f1);
 	}
 	
 	//add edge v-w
-	void addEdge(int v, int  w) {
-		adj[v].add(w);
-		adj[w].add(v);
+	public void addEdge(int v, int  w) {
+		f1.addEdge(v, w, adj);
 		++edges;
 	}
 	
