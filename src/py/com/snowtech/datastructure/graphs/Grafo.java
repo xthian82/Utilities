@@ -85,10 +85,6 @@ public class Grafo {
 		return this.edges;
 	}
 	
-	public String toString() {
-		return "";
-	}
-	
 	//compute degree of v
 	@SuppressWarnings("unused")
 	public static int degree(Grafo g, int v) {
