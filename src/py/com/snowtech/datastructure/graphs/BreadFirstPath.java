@@ -6,10 +6,11 @@ public class BreadFirstPath implements Path {
 	private boolean[] marked;
 	private int[] edgeTo;
 	private int s;
+	private Cola<Integer> markedNodes;
 	
 	public BreadFirstPath(Grafo g, int s) {
 		int vertices = g.V();
-		
+		markedNodes = new Cola<Integer>();
 		marked = new boolean[vertices];
 		edgeTo = new int[vertices];
 		this.s = s;
@@ -18,7 +19,7 @@ public class BreadFirstPath implements Path {
 			marked[i] = false;
 			edgeTo[i] = -1;
 		}
-		
+		markedNodes.enqueue(s);
 		bfs(g, s);
 	}
 	
@@ -31,8 +32,9 @@ public class BreadFirstPath implements Path {
 		while (!queue.isEmpty()) {
 			Integer v = queue.dequeue();
 			for (int w : g.adj(v)) {
-				if (!marked[w]) {
+				if (!marked[w]) {					
 					queue.enqueue(w);
+					markedNodes.enqueue(w);
 					marked[w] = true;
 					edgeTo[w] = v;
 				}
@@ -55,5 +57,9 @@ public class BreadFirstPath implements Path {
 		queue.add(s);
 		
 		return queue;
+	}
+	
+	public Iterable<Integer> pushedNodes() {
+		return this.markedNodes;
 	}
 }

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import py.com.snowtech.datastructure.graphs.Digrafo;
 import py.com.snowtech.datastructure.lists.Pila;
 
+//Or also DepthFirstOrder
 public class Topological {
 	private boolean[] marked;
 	private Pila<Integer> reversePost;
@@ -39,11 +40,7 @@ public class Topological {
 	public static void main(String[] args) throws FileNotFoundException {
 		Digrafo g = new Digrafo(new FileReader("toposort.txt"));
 		
-		/*for (int v=0; v<g.V(); v++) {
-			for (int w : g.adj(v)) {
-				System.out.println(v + " - " + w);
-			}
-		} */
+		g.print();
 		
 		Topological app = new Topological(g);
 		

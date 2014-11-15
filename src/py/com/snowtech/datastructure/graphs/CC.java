@@ -27,12 +27,12 @@ public class CC {
 	}
 	
 	//numero de componentes conectados;
-	int count() {
+	public int count() {
 		return this.count;
 	}
 	
 	//componente identificador para v
-	int id(int v) {
+	public int id(int v) {
 		return id[v];
 	}
 

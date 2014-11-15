@@ -6,18 +6,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import py.com.snowtech.datastructure.lists.Bolsa;
+import py.com.snowtech.datastructure.lists.Lista;
 
 public class Grafo {
 	protected final int vertices;
 	protected int edges;
-	protected Bolsa<Integer>[] adj;
+	protected Lista<Integer>[] adj;
 	
 	private static final ProcessEdge f1 = new ProcessEdge() {
-		public void addEdge(int v, int w, Bolsa<Integer>[] adj) {
+		public void addEdge(int v, int w, Lista<Integer>[] adj) {
 			adj[v].add(w);
 			adj[w].add(v);
 	    }
+
+		@Override
+		public void revAddEdge(int v, int w, Lista<Integer>[] adj) {
+			adj[v].addFirst(w);
+			adj[w].addFirst(v);
+		}
 	};
 	
 	public Grafo(int V) {
@@ -28,10 +34,10 @@ public class Grafo {
 	
 	@SuppressWarnings("unchecked")
 	private void buildList(int total) {
-		adj = (Bolsa<Integer>[])new Bolsa[total];
+		adj = (Lista<Integer>[])new Lista[total];
 		
 		for (int v = 0; v < total; v++)
-			adj[v] = new Bolsa<Integer>();
+			adj[v] = new Lista<Integer>();
 	}
 	
 	private int processFile(InputStreamReader in, ProcessEdge p) {
@@ -135,6 +141,17 @@ public class Grafo {
 		}
 		
 		return count / 2;
+	}
+	
+	public void print() {
+		for (int v=0; v<V(); v++) {
+			System.out.print(v + ":");
+			for (int w : adj(v)) {
+				System.out.print(" " + w);
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {

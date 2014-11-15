@@ -53,7 +53,8 @@ public class Lista<Item> implements Iterable<Item> {
 	
 	//TODO: fix remove
 	public void remove() {
-		Node t = head.next;
+		if (size <= 0) return;
+		Node t = head;
 		
 		while (t != null && t.next != null && t.next.next != null) {
 			t = t.next;
@@ -62,6 +63,7 @@ public class Lista<Item> implements Iterable<Item> {
 		if (t != null) {
 			t.next = null;
 			--size;
+			current = t;
 		}
 	}
 	
@@ -105,27 +107,37 @@ public class Lista<Item> implements Iterable<Item> {
 		ap.add(5);
 		ap.add(9);
 		ap.add(19);
-		System.out.println(ap.size());
+		System.out.println("\n------------- " + ap.size());
+		Iterator<Integer> it = ap.iterator();
+		while(it.hasNext()) System.out.print(it.next() + " ");
 		ap.addFirst(31);
 		ap.addFirst(4);
-		System.out.println(ap.size());
+		System.out.println("\n------------- " + ap.size());
+		it = ap.iterator();
+		while(it.hasNext()) System.out.print(it.next() + " ");
 		ap.removeFirst();
 		ap.remove();
 		ap.remove();
-		System.out.println(ap.size());
+		System.out.println("\n------------- " + ap.size());
+		it = ap.iterator();
+		while(it.hasNext()) System.out.print(it.next() + " ");
 		ap.removeFirst();
 		ap.remove();
-		System.out.println(ap.size());
+		System.out.println("\n------------- " + ap.size());
+		it = ap.iterator();
+		while(it.hasNext()) System.out.print(it.next() + " ");
 		ap.remove();
 		ap.remove();
 		ap.remove();
 		ap.remove();
 		
-		System.out.println(ap.size());
+		System.out.println("\n------------- " + ap.size());
+		it = ap.iterator();
+		while(it.hasNext()) System.out.print(it.next() + " ");
 		ap.add(67);
 		ap.addFirst(34);
-		
-		Iterator<Integer> it = ap.iterator();
+		System.out.println("\n------------- " + ap.size());
+		it = ap.iterator();
 		while(it.hasNext()) System.out.print(it.next() + " ");
 	}
 }
