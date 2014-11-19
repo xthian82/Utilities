@@ -9,20 +9,21 @@ import py.com.snowtech.datastructure.graphs.Grafo;
 public class Graph1 {
 	
 	public static void main(String... args) throws FileNotFoundException {
-		Grafo g = new Grafo(new FileReader("c:\\APs\\ques1.txt"));
+		Grafo g = new Grafo(new FileReader("tokens.txt"));
+		g.letterPrint();
+		
 		String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
 		DepthFirstPath p = new DepthFirstPath(g, 0);
-		for (int v=0; v<g.V(); v++) {
-			System.out.print(letters[v] + ": ");
-			for (int w : g.adj(v)) {
-				System.out.print(letters[w] + " ");
-			}
-			System.out.println();
-		}
+		//DepthFirstPath p2 = new DepthFirstPath(g, 0, true);
+		
 		System.out.print("\nQuestion 1: ");
 		for (int v : p.pushedNodes()) {
 			System.out.print(letters[v] + " ");
 		}
+		//System.out.print("\nQuestion 1: ");
+		//for (int v : p2.pushedNodes()) {
+			//System.out.print(letters[v] + " ");
+		//}
 	}
 }
 

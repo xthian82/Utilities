@@ -8,7 +8,7 @@ import py.com.snowtech.datastructure.graphs.Grafo;
 
 public class Graph2 {
 	public static void main(String... args) throws FileNotFoundException {
-		Grafo g = new Grafo(new FileReader("c:\\APs\\ques2.txt"));
+		Grafo g = new Grafo(new FileReader("ques2.txt"));
 		String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H"};
 		
 		for (int v=0; v<g.V(); v++) {

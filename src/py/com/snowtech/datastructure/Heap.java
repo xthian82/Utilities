@@ -36,7 +36,7 @@ public class Heap<Key extends Comparable<Key>> implements Iterable<Key> {
 		swimUp(N/2, N);
 	}
 	
-	public Key deleteMax() {
+	public Key delete() {
 		if (isEmpty()) throw new ArrayIndexOutOfBoundsException(-1);
 		
 		Key max = p[1];
@@ -108,7 +108,7 @@ public class Heap<Key extends Comparable<Key>> implements Iterable<Key> {
 		h.insert(2);
 		h.insert(12);
 		h.insert(4);
-		h.deleteMax();
+		h.delete();
 		
 		Iterator<Integer> it = h.iterator();
 		

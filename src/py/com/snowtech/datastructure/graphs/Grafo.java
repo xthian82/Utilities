@@ -12,6 +12,7 @@ public class Grafo {
 	protected final int vertices;
 	protected int edges;
 	protected Lista<Integer>[] adj;
+	private static String[] letters;
 	
 	private static final ProcessEdge f1 = new ProcessEdge() {
 		public void addEdge(int v, int w, Lista<Integer>[] adj) {
@@ -35,9 +36,13 @@ public class Grafo {
 	@SuppressWarnings("unchecked")
 	private void buildList(int total) {
 		adj = (Lista<Integer>[])new Lista[total];
+		letters = new String[total];
 		
-		for (int v = 0; v < total; v++)
+		for (int v = 0; v < total; v++) {
 			adj[v] = new Lista<Integer>();
+			letters[v] = "" + (char)('A' + v);
+		}
+		
 	}
 	
 	private int processFile(InputStreamReader in, ProcessEdge p) {
@@ -102,6 +107,20 @@ public class Grafo {
 	//number of edges
 	public int E() {
 		return this.edges;
+	}
+	
+	public void letterPrint() {
+		int total = V();
+		
+		for (int v=0; v<total; v++) {
+			System.out.print(letters[v] + ":");
+			for (int w : adj(v)) {
+				System.out.print(" " + letters[w]);
+			}
+			System.out.println();
+		}
+		System.out.println();
+		
 	}
 	
 	//compute degree of v
