@@ -3,6 +3,12 @@ package py.com.snowtech.datastructure.graphs;
 import py.com.snowtech.datastructure.MinPQ;
 import py.com.snowtech.datastructure.lists.Cola;
 
+/**
+ * Minimum spanning tree (Prim's Algorithm)
+ * 
+ * @author cristhian
+ *
+ */
 public class LazyPrimMST {
 	private boolean[] marked;
 	private Cola<Edge> mst;

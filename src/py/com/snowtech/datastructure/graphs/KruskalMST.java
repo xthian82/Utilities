@@ -4,7 +4,13 @@ import py.com.snowtech.datastructure.MinPQ;
 import py.com.snowtech.datastructure.lists.Cola;
 import py.com.snowtech.util.UnionFind;
 
-//Minumum spanning tree (Kruskal Algorithm)
+/**
+ * Minumum spanning tree (Kruskal's Algorithm)
+ * 
+ * 
+ * @author cristhian
+ *
+ */
 public class KruskalMST {
 	private Cola<Edge> mst = new Cola<Edge>();
 	

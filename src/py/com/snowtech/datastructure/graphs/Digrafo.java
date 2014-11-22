@@ -50,7 +50,7 @@ public class Digrafo extends Grafo {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		Digrafo g = new Digrafo(new FileReader("digraph3.txt"));
+		Digrafo g = new Digrafo(new FileReader("graphs/digraph3.txt"));
 		Digrafo rg = g.reverse();
 		System.out.print("Original Graph\n");
 		g.print();

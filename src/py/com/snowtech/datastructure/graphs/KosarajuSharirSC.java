@@ -5,7 +5,12 @@ import java.io.FileReader;
 
 import py.com.snowtech.sort.Topological;
 
-//Strong components
+/**
+ * Get a list of strong connected vertices of a graph
+ * 
+ * @author cristhian
+ *
+ */
 //reverse dfs 
 //original dfs
 public class KosarajuSharirSC {
@@ -54,7 +59,7 @@ public class KosarajuSharirSC {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		Digrafo g = new Digrafo(new FileReader("digraph3.txt"));
+		Digrafo g = new Digrafo(new FileReader("graphs/digraph3.txt"));
 		KosarajuSharirSC app = new KosarajuSharirSC(g);
 		
 		for (int v = 0; v < app.getVertexs(); v++) {

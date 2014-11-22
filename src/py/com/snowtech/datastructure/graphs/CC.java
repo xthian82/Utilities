@@ -1,7 +1,13 @@
 package py.com.snowtech.datastructure.graphs;
 
-//preprocesar el grafo para responder consultas
-//es v conectado a w en tiempo constante
+/**
+ * Preprocess a graph to get in constant time if a vertice is 
+ * connected to another one
+ * 
+ * @author cristhian
+ *
+ */
+
 public class CC {
 	private boolean marked[];
 	private int count;

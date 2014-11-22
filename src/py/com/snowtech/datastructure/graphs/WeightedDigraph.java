@@ -1,35 +1,33 @@
 package py.com.snowtech.datastructure.graphs;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import py.com.snowtech.datastructure.lists.Lista;
 
-public class WeigthedGraph {
+public class WeightedDigraph {
 	private final int vertices;
-	private Lista<Edge>[] adj;
-	private Lista<Edge> edges;
+	private Lista<DirectedEdge>[] adj;
+	private Lista<DirectedEdge> edges;
 	
-	public WeigthedGraph(int V) {
+	public WeightedDigraph(int V) {
 		this.vertices = V;
-		this.edges = new Lista<Edge>();
+		this.edges = new Lista<DirectedEdge>();
 		buildList(V);
 	}
 	
-	public WeigthedGraph(InputStreamReader in) {
-		this.edges = new Lista<Edge>();
+	public WeightedDigraph(InputStreamReader in) {
+		this.edges = new Lista<DirectedEdge>();
 		this.vertices = processFile( in );
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void buildList(int total) {
-		adj = (Lista<Edge>[])new Lista[total];
+		adj = (Lista<DirectedEdge>[])new Lista[total];
 		
 		for (int v = 0; v < total; v++) {
-			adj[v] = new Lista<Edge>();
+			adj[v] = new Lista<DirectedEdge>();
 		}
 		
 	}
@@ -52,7 +50,7 @@ public class WeigthedGraph {
 						int v = Integer.parseInt(tok[0]);
 						int w = Integer.parseInt(tok[1]);
 						double we = Double.parseDouble(tok[2]);
-						addEge(new Edge(v, w, we));
+						addEge(new DirectedEdge(v, w, we));
 					} catch (NumberFormatException x) {
 						System.err.println(x.getMessage());
 					}
@@ -67,30 +65,18 @@ public class WeigthedGraph {
 		return n;
 	}
 
-	public void addEge(Edge e) {
-		int v = e.either(), w = e.other(v);
+	public void addEge(DirectedEdge e) {
+		int v = e.from();
 		adj[v].add(e);
-		adj[w].add(e);
 		edges.add(e);
 		
 	}
 	
-	public Iterable<Edge> adj(int v) {
+	public Iterable<DirectedEdge> adj(int v) {
 		return adj[v];
 	}
 	
-	public void print() {
-		for (int v=0; v<V(); v++) {
-			System.out.print(v + ":");
-			for (Edge e : adj(v)) {
-				System.out.print(" " + e);
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-	
-	public Iterable<Edge> edges() {
+	public Iterable<DirectedEdge> edges() {
 		return this.edges;
 	}
 	
@@ -100,8 +86,19 @@ public class WeigthedGraph {
 		return this.vertices;
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
-		WeigthedGraph g = new WeigthedGraph(new FileReader("graphs/wgrafo1.txt"));
-		g.print();
+	//number of edges
+	public int E() {
+		return this.edges.size();
+	}
+	
+	public void print() {
+		for (int v=0; v<V(); v++) {
+			System.out.print(v + ":");
+			for (DirectedEdge e : adj(v)) {
+				System.out.print(" " + e);
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 }
