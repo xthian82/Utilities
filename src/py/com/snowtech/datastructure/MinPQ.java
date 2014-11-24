@@ -5,21 +5,23 @@ import java.util.Iterator;
 
 public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
 	private ArrayList<Key> p;
+	private int N;
 	
 	public MinPQ() {
 		p = new ArrayList<Key>();
 		p.add(null);
+		N = 0;
 	}
 	
 	public void insert(Key key) {
 		p.add(key);
-		int N = p.size()-1;
+		++N;
 		
 		swimUp(N/2, N);
 	}
 	
 	private void swimUp(int parent, int child) {
-		if (parent < 1) return;
+		if (parent <= 0) return;
 		
 		if (great(parent, child)) {
 			exch(parent, child);
@@ -39,23 +41,28 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
 	}
 	
 	public boolean isEmpty() {
-		return p.size() == 0;
+		return N == 0;
 	}
 	
 	public Key delete() {
 		if (isEmpty()) return null;
-		int N = p.size()-1;
+		
 		Key max = p.get(1);
-		exch(1, N);
+		exch(1, N--);
 		sink( 1 );
-		p.remove(N);
+		p.remove(N+1);
 		
 		return max;
 	}
 	
+	public Key get(int i) {
+		if (i >= N) return null;
+		
+		return p.get(i + 1);
+	}
+	
 	private void sink(int k) {
 		int j = 2*k, swap;
-		int N = p.size();
 		
 		while (j <= N) {
 			swap = k;
@@ -86,7 +93,7 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
 		
 		@Override
 		public boolean hasNext() {
-			return current <= p.size()-1;
+			return current <= N;
 		}
 
 		@Override
@@ -99,6 +106,15 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
 		}
 
 	}
+	
+	public void print() {
+		System.out.print("[ ");
+		for (Key k : p) {
+			if (k == null) continue;
+			System.out.print(k + " ");
+		}
+		System.out.println("]");
+	}
 
 	public static void main(String[] args) {
 		MinPQ<Integer> h = new MinPQ<Integer>();
@@ -108,15 +124,26 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
 		h.insert(3);
 		h.insert(1);
 		h.insert(8);
-		h.insert(7);
+		/*h.insert(7);
 		h.insert(2);
 		h.insert(12);
-		h.insert(4);
+		h.insert(4);*/
+		//System.out.println(h.get(0));
+		//System.out.println(h.get(1));
+		h.print();
 		h.delete();
+		h.print();
+		h.delete();
+        h.print();
+		h.delete();
+		h.print();
+		//h.delete();
+		System.out.println(h.get(0));
+		System.out.println(h.get(1));
+		h.print();
 		
 		Iterator<Integer> it = h.iterator();
-		
 		while (it.hasNext())
-			System.out.print(it.next()+" ");
+			System.out.println(it.next());
 	}
 }

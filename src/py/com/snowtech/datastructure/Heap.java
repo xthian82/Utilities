@@ -2,7 +2,7 @@ package py.com.snowtech.datastructure;
 
 import java.util.Iterator;
 
-/*
+/** MaxPQ
  *  Uses for Priority Queues
  *  ------------------------
  *  
@@ -14,7 +14,7 @@ import java.util.Iterator;
  * AI
  * statistics
  * Operating systems
- * discrete optimizatioin
+ * discrete optimization
  * spam filtering
  * */
 
@@ -36,6 +36,7 @@ public class Heap<Key extends Comparable<Key>> implements Iterable<Key> {
 		swimUp(N/2, N);
 	}
 	
+	//or deleteMax()
 	public Key delete() {
 		if (isEmpty()) throw new ArrayIndexOutOfBoundsException(-1);
 		
