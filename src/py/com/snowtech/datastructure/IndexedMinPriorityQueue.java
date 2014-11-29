@@ -22,16 +22,15 @@ public class IndexedMinPriorityQueue<Item> {
 		swimUp(N/2, N);
 	}
 	
-	public int/*Item*/ delMin() {
+	public int delMin() {
 		if (isEmpty()) throw new ArrayIndexOutOfBoundsException(-1);
-		
-		Item min = p[1];
+
 		exch(1, N--);
 		sink( 1 );
 		id[N + 1] = null;
 		p[N + 1] = null;
 		
-		return 1; //min;
+		return 1;
 	}
 	
 	public void decreaseKey(int k, Item item) {

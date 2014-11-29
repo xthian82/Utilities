@@ -24,4 +24,28 @@ public class Utils {
 	    for(int k = iBegin; k < iEnd; k++)
 	        target[k] = source[k];
 	}
+
+	public static void print(char[] a) {
+		int i;
+		System.out.print("[ ");
+		
+		for (i=0; i<a.length-1; i++) {
+			System.out.print(a[i] + ", ");
+		}
+		
+		System.out.println(a[i] + " ]");
+		
+	}
+	
+	public static void print(String[] a) {
+		int i;
+		System.out.print("[ ");
+		
+		for (i=0; i<a.length-1; i++) {
+			System.out.print(a[i] + ", ");
+		}
+		
+		System.out.println(a[i] + " ]");
+		
+	}
 }

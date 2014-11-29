@@ -34,6 +34,31 @@ public class Quick extends Sort {
 		sort(o, null);
 	}
 	
+	public void threeWayRadixSort(String[] a) {
+		threeWayRadixSort(a, 0, a.length-1, 0);
+	}
+	
+	private void threeWayRadixSort(String[] a, int lo, int hi, int d) {
+		if (hi <= lo) return;
+		
+		int lt=lo, gt = hi;
+		int v = MSD.charAt(a[lo], d);
+		int i = lo + 1;
+		
+		while (i <= gt) {
+			int t = MSD.charAt(a[i], d);
+			
+			if (t < v) 		exch(a, lt++, i++);
+			else if (t > v) exch(a, i, gt--);
+			else 			i++;
+		}
+		
+		threeWayRadixSort(a, lo, lt-1, d);
+		if (v >= 0) threeWayRadixSort(a, lt, gt, d+1);
+		threeWayRadixSort(a, gt+1, hi, d);
+		
+	}
+
 	public void sort(Comparable[] o, Comparator c) {
 		sort(c, o, 0, o.length-1);
 	}

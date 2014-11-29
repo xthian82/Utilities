@@ -1,0 +1,11 @@
+           	|worst	|average	|extraspace	|stable
+--------------------------------------------------
+insertion	|n^2/2  |n^2/4  	|1			|yes		
+selection	|		|			|			|
+quick   	|N^2   	|NlogN		|clogN 		|no
+merge     	|NlogN 	|NlogN		|N			|yes
+heap      	|NlogN 	|NlogN		|1			|no		
+radix      	|		|			|N+R        |yes
+LSD         |2WN    |2WN        |N+R        |yes
+MSD         |2WN	|NlogrN		|N + DR		|yes
+3wayRadixStr|WNlogN	|NlogN		|logN + W	|no

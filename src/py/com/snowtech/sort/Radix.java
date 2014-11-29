@@ -42,11 +42,35 @@ public class Radix {
 			exp *= BASE;
 		}
 	}
+	
+	public static void bucket(char[] a, int R) {
+		int N = a.length;
+		int[] count = new int[R+1];
+		char[] aux = new char[N];
+		
+		for (int i=0; i<N; i++)
+			count[ (int)(a[i]-'a') + 1 ]++;
+		
+		for (int r=0; r < R; r++)
+			count[r+1] += count[r];
+		
+		for (int i=0; i<N; i++)
+			aux[ count[ (int)(a[i]-'a') ]++ ] = a[i];
+		
+		for (int i=0; i<N; i++)
+			a[i] = aux[i];
+	}
+	
 	public static void main(String[] args) {
 		int [] a = {6,5,46,2,3,10,9};
+		char [] b = {'d','a','c','f','f','b','d','b','f','b','e','a'}; //R = 6
 		
 		Utils.print( a );
 		Radix.sort( a );
 		Utils.print( a );
+		System.out.println("===================");
+		Utils.print( b );
+		Radix.bucket(b, 6);
+		Utils.print( b );
 	}
 }

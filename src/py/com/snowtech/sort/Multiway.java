@@ -44,6 +44,8 @@ public class Multiway {
 		} 
 	}
 	
+	//TODO: make it WORK!!
+	@SuppressWarnings("unused")
 	private static String getNextString(InputStreamReader r) {
 		
 		String s = "";
