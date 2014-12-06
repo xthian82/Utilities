@@ -1,0 +1,7 @@
+					operation count
+					guarantee 	typocal
+					--------------------
+brute force 		MN			N
+knuth-morris-pratt 	N			N
+Boyer-Moore 		N 			N/M
+Rabin Karp 			N 			N

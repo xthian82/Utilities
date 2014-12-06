@@ -4,3 +4,5 @@ sequential search      N    |    N   |   N
 binary search         logN  |    2N  |   N
 binary search tree     N    |    N   |   N
 2-3 tree              logN  |  logN  | 
+red-blacl             logN  |  logN  | logN
+hash tables            1    |    1   |   1
