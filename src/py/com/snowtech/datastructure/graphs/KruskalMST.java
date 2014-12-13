@@ -2,7 +2,7 @@ package py.com.snowtech.datastructure.graphs;
 
 import py.com.snowtech.datastructure.MinPQ;
 import py.com.snowtech.datastructure.lists.Cola;
-import py.com.snowtech.substring.UnionFind;
+import py.com.snowtech.string.search.UnionFind;
 
 /**
  * Minumum spanning tree (Kruskal's Algorithm)

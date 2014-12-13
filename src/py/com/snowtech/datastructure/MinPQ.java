@@ -107,6 +107,10 @@ public class MinPQ<Key extends Comparable<Key>> implements Iterable<Key> {
 
 	}
 	
+	public int size() {
+		return this.N;
+	}
+	
 	public void print() {
 		System.out.print("[ ");
 		for (Key k : p) {

@@ -1,4 +1,4 @@
-package py.com.snowtech.substring;
+package py.com.snowtech.string.search;
 
 /**
  * takes ~N/M character compares to search 
