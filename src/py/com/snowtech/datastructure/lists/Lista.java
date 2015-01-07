@@ -51,6 +51,18 @@ public class Lista<Item> implements Iterable<Item> {
 		}
 	}
 	
+	public Item[] toArray() {
+		Item[] n = (Item[]) new Object[size];
+		
+		Iterator<Item> ap = this.iterator();
+		int i=0;
+		while (ap.hasNext()) {
+			n[i++] = ap.next();
+		}
+		
+		return n;
+	}
+	
 	//TODO: fix remove
 	public void remove() {
 		if (size <= 0) return;
