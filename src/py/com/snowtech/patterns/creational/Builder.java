@@ -1,4 +1,4 @@
-package py.com.snowtech.patterns;
+package py.com.snowtech.patterns.creational;
 
 import java.util.ArrayList;
 import java.util.List;

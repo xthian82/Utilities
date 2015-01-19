@@ -1,10 +1,11 @@
-package py.com.snowtech.patterns;
+package py.com.snowtech.patterns.behavioral;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Observable;
 import java.util.Observer;
+
 
 class EventSource extends Observable implements Runnable {
     @Override

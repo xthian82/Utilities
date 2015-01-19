@@ -1,7 +1,6 @@
 package py.com.snowtech.compression;
 
 import py.com.snowtech.datastructure.MinPQ;
-import py.com.snowtech.datastructure.trees.BST;
 
 public class Huffman {
 	private BinaryStdIn bStdin;

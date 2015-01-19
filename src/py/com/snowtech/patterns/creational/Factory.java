@@ -1,4 +1,4 @@
-package py.com.snowtech.patterns;
+package py.com.snowtech.patterns.creational;
 
 /**
  * Creational Design Pattern

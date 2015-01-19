@@ -1,5 +1,16 @@
-package py.com.snowtech.patterns;
+package py.com.snowtech.patterns.structural;
 
+
+/**
+ * In proxy pattern, a class represents functionality of another class. This type of design 
+ * pattern comes under structural pattern. 
+ * 
+ * In proxy pattern, we create object having original object to interface its functionality 
+ * to outer world.
+ * 
+ * @author cristhian
+ *
+ */
 interface Image {
 	public void displayImage();
 }
@@ -29,7 +40,6 @@ class RealImage implements Image {
     public void displayImage() { 
         System.out.println("Displaying " + filename); 
     }
- 
 }
 
 class ProxyImage implements Image {
