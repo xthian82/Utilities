@@ -1,14 +1,22 @@
 package py.com.snowtech.patterns.structural;
 
 class Student {
-	private String rollNo;
+	private int rollNo;
 	private String name;
 
-	public String getRollNo() {
+	public Student() {
+		
+	}
+	public Student(String name, int rollNo) {
+		this.name = name;
+		this.rollNo = rollNo;
+	}
+
+	public int getRollNo() {
 		return rollNo;
 	}
 
-	public void setRollNo(String rollNo) {
+	public void setRollNo(int rollNo) {
 		this.rollNo = rollNo;
 	}
 
@@ -22,10 +30,13 @@ class Student {
 }
 
 class StudentView {
-	public void printStudentDetails(String studentName, String studentRollNo) {
+	public void printStudentDetails(String studentName, int studentRollNo) {
 		System.out.println("Student: ");
 		System.out.println("Name: " + studentName);
 		System.out.println("Roll No: " + studentRollNo);
+	}
+	public void show() {
+		System.out.println("Displaying Student Page");
 	}
 }
 
@@ -46,11 +57,11 @@ class StudentController {
 		return model.getName();
 	}
 
-	public void setStudentRollNo(String rollNo) {
+	public void setStudentRollNo(int rollNo) {
 		model.setRollNo(rollNo);
 	}
 
-	public String getStudentRollNo() {
+	public int getStudentRollNo() {
 		return model.getRollNo();
 	}
 
@@ -81,7 +92,7 @@ public class MVCPattern {
 	private static Student retriveStudentFromDatabase() {
 		Student student = new Student();
 		student.setName("Robert");
-		student.setRollNo("10");
+		student.setRollNo(10);
 		return student;
 	}
 }
