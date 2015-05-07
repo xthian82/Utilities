@@ -9,7 +9,7 @@ import py.com.snowtech.util.Utils;
  * @author cristhian
  *
  */
-public class MSD {
+public class MostSignificantDigit {
 	private static int R = 256;
 
 	public static void sort(String[] a) {
@@ -48,7 +48,7 @@ public class MSD {
 		String[] s = {"elf", "abf", "baa", "oba", "abc", "det", "dte", "efg"};
 		
 		Utils.print(s);
-		MSD.sort(s);
+		MostSignificantDigit.sort(s);
 		Utils.print(s);
 	}
 }

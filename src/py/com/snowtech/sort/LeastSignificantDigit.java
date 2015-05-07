@@ -10,7 +10,7 @@ import py.com.snowtech.util.Utils;
  * @author cristhian
  *
  */
-public class LSD {
+public class LeastSignificantDigit {
 	public static void sort(String[] a, int W) {
 		int R = 256;
 		int N = a.length;
@@ -37,7 +37,7 @@ public class LSD {
 		String[] s = {"elf", "abf", "baa", "oba", "abc", "det", "dte", "efg"};
 		
 		Utils.print(s);
-		LSD.sort(s, 3);
+		LeastSignificantDigit.sort(s, 3);
 		Utils.print(s);
 	}
 }

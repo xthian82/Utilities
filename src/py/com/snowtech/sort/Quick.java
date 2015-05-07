@@ -42,11 +42,11 @@ public class Quick extends Sort {
 		if (hi <= lo) return;
 		
 		int lt=lo, gt = hi;
-		int v = MSD.charAt(a[lo], d);
+		int v = MostSignificantDigit.charAt(a[lo], d);
 		int i = lo + 1;
 		
 		while (i <= gt) {
-			int t = MSD.charAt(a[i], d);
+			int t = MostSignificantDigit.charAt(a[i], d);
 			
 			if (t < v) 		exch(a, lt++, i++);
 			else if (t > v) exch(a, i, gt--);
