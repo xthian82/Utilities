@@ -18,11 +18,11 @@ public abstract class RepeatedSubstring {
 		for (int i=0; i<N; i++)
 			suffixes[i] = s.substring(i, N);
 		
-		System.out.println("...NonOrdered Words...");
-		print(suffixes, '-');
+		//System.out.println("...NonOrdered Words...");
+		//print(suffixes, '-');
 		Arrays.sort(suffixes);
-		System.out.println("...Ordered Words...");
-		print(suffixes, '*');
+		//System.out.println("...Ordered Words...");
+		//print(suffixes, '*');
 		String lrs = "";
 		
 		for (int i=0; i<N-1; i++) {
