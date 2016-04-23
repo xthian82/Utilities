@@ -38,7 +38,13 @@ public class Palindrom {
 	}
 	
 	public static void main(String... args) {
-		System.out.print(Palindrom.isPalindrom(1));
+		int c = 0;
+		for (int i=1;i<1000000000;i++) {
+			if (isPalindrom(i)) {
+				++c;
+			}
+		}
+		System.out.println(c);
 	}
 }
 

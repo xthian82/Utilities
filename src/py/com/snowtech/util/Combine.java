@@ -48,7 +48,7 @@ public class Combine {
 	}
 	
 	public static void main(String... args) {
-		//Combine.combine(5, 2);
-		Combine.permute(3);
+		Combine.combine(4, 2);
+		//Combine.permute(3);
 	}
 }

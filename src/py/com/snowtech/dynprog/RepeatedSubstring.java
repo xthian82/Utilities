@@ -1,4 +1,4 @@
-package py.com.snowtech.util;
+package py.com.snowtech.dynprog;
 
 import java.util.Arrays;
 
