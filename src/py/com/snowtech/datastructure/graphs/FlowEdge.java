@@ -2,7 +2,7 @@ package py.com.snowtech.datastructure.graphs;
 
 import javax.management.RuntimeErrorException;
 
-public class FlowEdge {
+public class FlowEdge implements Comparable<FlowEdge> {
 	private int v;
 	private int w;
 	private double capacity;
@@ -51,5 +51,16 @@ public class FlowEdge {
 	
 	public String toString() {
 		return "[" + this.v + " " + flow + "/" + capacity + "]";
+	}
+
+	
+
+	@Override
+	public int compareTo(FlowEdge o) {
+		if (o == null) return -1;
+		
+		if (this.capacity < o.capacity) return -1;
+		else if (this.capacity > o.capacity) return 1;
+		return 0;
 	}
 }

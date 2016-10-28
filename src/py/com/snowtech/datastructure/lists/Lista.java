@@ -1,9 +1,6 @@
 package py.com.snowtech.datastructure.lists;
 
-import java.util.Comparator;
 import java.util.Iterator;
-
-
 
 public class Lista<Item extends Comparable<Item>> implements Iterable<Item> {
 	private Node head;
@@ -209,5 +206,19 @@ public class Lista<Item extends Comparable<Item>> implements Iterable<Item> {
 		System.out.println("\n------------- " + ap.size());
 		it = ap.iterator();
 		while(it.hasNext()) System.out.print(it.next() + " ");
+	}
+
+	public Item[] toArray() {
+		@SuppressWarnings("unchecked")
+		Item[] n = (Item[]) new Object[size]; 		
+ 		Iterator<Item> ap = this.iterator();
+ 		
+ 		int i=0;
+ 		while (ap.hasNext()) {
+ 			n[i++] = ap.next();
+ 		}
+ 		
+ 		return n;
+		
 	}
 }

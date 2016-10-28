@@ -19,7 +19,6 @@ public class FlowNetwork {
 		for (int v = 0; v < total; v++) {
 			adj[v] = new Lista<FlowEdge>();
 		}
-		
 	}
 	
 	public void addEge(FlowEdge e) {
@@ -33,10 +32,6 @@ public class FlowNetwork {
 	public Iterable<FlowEdge> adj(int v) {
 		return this.adj[v];
 	}
-	
-	/*public Iterable<FlowEdge> edges() {
-		
-	}*/
 	
 	public int V() {
 		return this.vertices;
