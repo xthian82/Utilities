@@ -15,4 +15,13 @@ public class Knapsack {
 
 	}
 
+	class Bag {
+		int value;
+		int weight;
+		
+		public Bag(int v, int w) {
+			this.value = v;
+			this.weight = w;
+		}
+	}
 }

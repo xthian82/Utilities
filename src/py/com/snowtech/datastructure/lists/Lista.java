@@ -1,10 +1,11 @@
 package py.com.snowtech.datastructure.lists;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 
 
-public class Lista<Item> implements Iterable<Item> {
+public class Lista<Item extends Comparable<Item>> implements Iterable<Item> {
 	private Node head;
 	private Node current;
 	private int size = 0;
@@ -28,7 +29,7 @@ public class Lista<Item> implements Iterable<Item> {
 		head = new Node(null);
 		current = null;
 	}
-	
+
 	public void add(Item item) {
 		if (current == null) current = head;
 		
@@ -44,38 +45,85 @@ public class Lista<Item> implements Iterable<Item> {
 		 ++size;
 	}
 	
+	public void addSort(Item item) {
+		Node t = head.next;
+		Node n = new Node(item);
+		
+		if (t == null) {
+			head.next = n;
+			current = n;
+			return;
+		}
+		
+		while (t != null && less(t.value, item) && t.next != null) {
+			t = t.next;
+		}
+		
+		if (t.next != null) {
+			n.next = t.next.next;
+			t.next = n;
+		} else if (t == head.next){
+			if (less(n.value, t.value)) {
+				n.next = head.next;
+				head.next = n;
+			} else {
+				t.next = n;
+			}
+		} else {
+			t.next=n;
+			current = n;
+		}
+		
+		++size;
+	}
+	
+	private boolean less(Item value, Item item) {
+		return value.compareTo(item) < 0;
+	}
+
 	public void removeFirst() {
-		if (head != null && head.next != null) {
+		if (head.next != null) {
 			head.next = head.next.next;
 			--size;
 		}
 	}
 	
-	public Item[] toArray() {
-		Item[] n = (Item[]) new Object[size];
-		
-		Iterator<Item> ap = this.iterator();
-		int i=0;
-		while (ap.hasNext()) {
-			n[i++] = ap.next();
-		}
-		
-		return n;
-	}
-	
-	//TODO: fix remove
 	public void remove() {
 		if (size <= 0) return;
-		Node t = head;
 		
+		Node t = head.next;
+
 		while (t != null && t.next != null && t.next.next != null) {
 			t = t.next;
 		}
 		
 		if (t != null) {
-			t.next = null;
+			if (t.next != null) {
+				t.next = null;			
+				current = t;
+			} else {
+				head.next = null;
+				current = null;
+			}
 			--size;
-			current = t;
+		}
+	}
+	
+	public void remove(Item value) {
+		Node t = head.next;
+
+		while (t != null && t.value != value && t.next != null && t.next.value != value) {
+			t = t.next;
+		}
+		
+		if (t != null) {
+			if (t != head.next) {
+				t.next = t.next.next;
+			}
+			else {
+				head.next = t.next;	
+			}
+			--size;
 		}
 	}
 	
@@ -148,6 +196,16 @@ public class Lista<Item> implements Iterable<Item> {
 		while(it.hasNext()) System.out.print(it.next() + " ");
 		ap.add(67);
 		ap.addFirst(34);
+		ap.add(6);
+		ap.add(5);
+		ap.remove(34);
+		ap.remove();
+		ap.remove();
+		ap.addSort(4);
+		ap.addSort(68);
+		ap.addSort(80);
+		ap.addSort(70);
+		//ap.add(10);
 		System.out.println("\n------------- " + ap.size());
 		it = ap.iterator();
 		while(it.hasNext()) System.out.print(it.next() + " ");

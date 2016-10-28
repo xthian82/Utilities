@@ -1,9 +1,7 @@
 package py.com.snowtech.dynprog;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Stack;
 
 
 /*
@@ -27,66 +25,24 @@ import java.util.Stack;
 7
 -3 2 -1 2 3 4 -5    [10 11]
  * */
-public class MaxSubarray {
-	static void solveArray(int[] arr) {
-		int length = arr.length;
-		int[] sums = new int[length];
-		
-		int i, maxC = arr[0], maxG=0;
-        sums[0] = arr[0];
-		for (int j=1; j<length; j++) {
-			for (i = 0; i < j; i++) {
-				
-				sums[i] += arr[j];
-				if (sums[i] > maxC) {
-					maxC = sums[i];
-				}
-			}
-			sums[i] = arr[i];
-			if (sums[i] > maxC) {
-				maxC = sums[i];
-			} 
-		} 
 
-		/*Arrays.sort(arr);
-		maxG = arr[length - 1];
-		for (i = length - 2; i >= 0; i--) {
-			if (arr[i] + maxG > maxG)
-				maxG += arr[i];
-		}*/
-		System.out.println(maxC + " " + maxG);
-	}
-	
+
+public class MaxSubarray {
 	static void solve(int[] arr) {
-		int i, length = arr.length;
-		int[] sum = new int[length];
-		sum[0] = arr[0];
 		
-		int maxC = Integer.MIN_VALUE;
-		for (i=1; i<length; i++) {
-			sum[i] = arr[i] + sum[i-1];
-		}
-		for (i=0;i<length-1; i++) {
-			maxC = Math.max(maxC , Math.max(sum[i], sum[i] + sum[i+1]));
-		}
-		maxC = Math.max(maxC, sum[length-1]);
-		
-		sum[length-1] = arr[length-1];
-		for (i=length-2; i>=0; i--) {
-			sum[i] = arr[i] + sum[i+1];
-		}
-		for (i=0;i<length-1; i++) {
-			maxC = Math.max(maxC, Math.max(sum[i], sum[i] + sum[i+1]));
-		}
-		maxC = Math.max(maxC, sum[0]);
-		Arrays.sort(arr);
-		int maxG = arr[length - 1];
-		for (i = length - 2; i >= 0; i--) {
-			if (arr[i] + maxG > maxG)
-				maxG += arr[i];
-		}
-		System.out.println(maxC + " " + maxG);
-	}
+        int i, maxC = arr[0], maxG, maxHere = arr[0];
+        
+        for (i = 1; i < arr.length; i++) {
+        	maxHere = Math.max(arr[i], maxHere + arr[i]);
+        	maxC = Math.max(maxC, maxHere);
+        }
+        Arrays.sort(arr);
+        maxG = arr[arr.length - 1];
+        for (i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] + maxG > maxG) maxG += arr[i];
+        }
+        System.out.println(maxC + " " + maxG);
+    }
 
 	
 	public static void main(String[] args) {
@@ -95,13 +51,11 @@ public class MaxSubarray {
 		while (T-- > 0) {
 			int N = sc.nextInt();
 			int[] array = new int[N];
-			long total = 0;
 			for (int a = 0; a < N; a++) {
 				array[a] = sc.nextInt();
 				
-				total += array[a];
 			}
-			solve(array); //, total);
+			solve(array);
 		}
 		sc.close();
 	}
