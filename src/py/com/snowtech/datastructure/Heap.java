@@ -1,6 +1,7 @@
 package py.com.snowtech.datastructure;
 
 import java.util.Iterator;
+import py.com.snowtech.datastructure.lists.Stack;
 
 /** MaxPQ
  *  Uses for Priority Queues

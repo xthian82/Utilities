@@ -1,6 +1,7 @@
 package py.com.snowtech.sort;
 
 import java.util.Comparator;
+import java.util.Random;
 
 @SuppressWarnings("rawtypes")
 public class Quick extends Sort {
@@ -70,10 +71,16 @@ public class Quick extends Sort {
 		Character[] d = {'L','x','D','a','b','C'};
 		
 		Quick quick = new Quick();
+		int size = 50_000;
+		Random rand = new Random();
+		Integer [] numbs = new Integer[size];
+		for (int i = 0; i < size; i++) {
+		    numbs[i] = rand.nextInt();
+		}
 		
-		quick.print(a);
-		quick.sort(a);
-		quick.print(a);
+		quick.print(numbs);
+		quick.sort(numbs);
+		quick.print(numbs);
 		
 		quick.print( b );
 		quick.sort( b );

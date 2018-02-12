@@ -16,6 +16,27 @@ connected(4,0) = true
 
 */
 
+/*
+private int root(int i) {
+
+	while (i != ids[i]) {
+		ids[i] = ids[ids[i]];
+		i = ids[i];
+	}
+
+	return i;
+}
+
+       0 1 2 3 4 5 6 7 8 9
+ids = [0 1 2 3 4 5 6 7 8 9]
+ sz = [1 1 1 1 1 1 1 1 1 1]
+
+
+ union(1, 9)
+
+
+ */
+
 public class UnionFind {
 	private int [] ids;
 	private int [] sz;
