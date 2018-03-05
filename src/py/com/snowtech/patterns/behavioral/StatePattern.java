@@ -20,7 +20,7 @@ package py.com.snowtech.patterns.behavioral;
  */
 
 interface State {
-	public void doAction(Context context);
+	void doAction(Context context);
 }
 
 class Context {

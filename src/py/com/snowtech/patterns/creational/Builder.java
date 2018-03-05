@@ -39,15 +39,15 @@ import java.util.List;
 // Create an interface Item representing food item and packing
 //-------------------------------------------------------------
 interface Item {
-	public String name();
+	String name();
 
-	public Packing packing();
+	Packing packing();
 
-	public float price();
+	float price();
 }
 
 interface Packing {
-	public String pack();
+	String pack();
 }
 
 // -------------------------------------------------------------

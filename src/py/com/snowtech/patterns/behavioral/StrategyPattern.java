@@ -23,7 +23,7 @@ package py.com.snowtech.patterns.behavioral;
  */
 
 interface Strategy {
-	public int doOperation(int num1, int num2);
+	int doOperation(int num1, int num2);
 }
 
 class OperationAdd implements Strategy {

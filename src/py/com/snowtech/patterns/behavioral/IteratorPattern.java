@@ -11,12 +11,12 @@ package py.com.snowtech.patterns.behavioral;
  */
 
 interface Iterator {
-	public boolean hasNext();
-	public Object next();
+	boolean hasNext();
+	Object next();
 }
 
 interface Container {
-	public Iterator getIterator();
+	Iterator getIterator();
 }
 
 class NameRepository implements Container {

@@ -23,7 +23,7 @@ package py.com.snowtech.patterns.behavioral;
  *
  */
 interface Expression {
-	public boolean interpret(String context);
+	boolean interpret(String context);
 }
 
 class TerminalExpression implements Expression {
@@ -44,8 +44,8 @@ class TerminalExpression implements Expression {
 }
 
 class OrExpression implements Expression {
-	private Expression expr1 = null;
-	private Expression expr2 = null;
+	private Expression expr1;
+	private Expression expr2;
 
 	public OrExpression(Expression expr1, Expression expr2) {
 		this.expr1 = expr1;
@@ -59,8 +59,8 @@ class OrExpression implements Expression {
 }
 
 class AndExpression implements Expression {
-	private Expression expr1 = null;
-	private Expression expr2 = null;
+	private Expression expr1;
+	private Expression expr2;
 
 	public AndExpression(Expression expr1, Expression expr2) {
 		this.expr1 = expr1;

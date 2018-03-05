@@ -2,7 +2,7 @@ package py.com.snowtech.patterns.behavioral;
 
 
 interface ICarElement {
-	public void accept(ICarElementVisitor visitor);
+    void accept(ICarElementVisitor visitor);
 }
 
 interface ICarElementVisitor {
