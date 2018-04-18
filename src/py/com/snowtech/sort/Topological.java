@@ -66,7 +66,7 @@ public class Topological {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		Digrafo g = new Digrafo(new FileReader("toposort.txt"));
+		Digrafo g = new Digrafo(new FileReader("graphs/toposort.txt"));
 		
 		g.print();
 		

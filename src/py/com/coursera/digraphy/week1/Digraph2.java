@@ -18,7 +18,7 @@ import py.com.snowtech.sort.Topological;
  * */
 public class Digraph2 {
 	public static void main(String[] args) throws FileNotFoundException {
-		Digrafo g = new Digrafo(new FileReader("digraph2.txt"));
+		Digrafo g = new Digrafo(new FileReader("graphs/digraph2.txt"));
 		String[] letters = { "A", "B", "C", "D", "E", "F", "G", "H" };
 
 		for (int v = 0; v < g.V(); v++) {
