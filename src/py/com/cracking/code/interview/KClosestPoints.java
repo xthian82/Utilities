@@ -1,5 +1,6 @@
 package py.com.cracking.code.interview;
 
+import java.util.Iterator;
 import java.util.TreeSet;
 
 public class KClosestPoints {
@@ -13,7 +14,12 @@ public class KClosestPoints {
         values.add(new Coord(0,2));
         values.add(new Coord(4,0));
 
-        values.forEach(val -> System.out.println(val));
+        Iterator<Coord> coordIterator = values.iterator();
+        for (int i = 0; i < 3; i++) {
+            if (coordIterator.hasNext()) {
+                System.out.println(coordIterator.next());
+            }
+        }
     }
 }
 
